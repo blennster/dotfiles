@@ -7,12 +7,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
--- Correct spelling with z=
--- Add good word with zg
--- navigate with ]s and [s
-vim.cmd [[set spelllang=en,sv,cjk]]
-vim.cmd [[set spellsuggest=best,9]]
-vim.cmd [[set spell]]
 
 require('packer').startup(function(use)
   -- Package manager
@@ -50,6 +44,13 @@ require('packer').startup(function(use)
   use { -- Additional text objects via treesitter
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter',
+  }
+
+  -- Terminal
+  use { 's1n7ax/nvim-terminal',
+    config = function()
+      vim.o.hidden = true
+    end
   }
 
   -- Bufferline
@@ -133,6 +134,14 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+-- Setup spelling
+-- Correct spelling with z=
+-- Add good word with zg
+-- navigate with ]s and [s
+vim.o.spelllang = 'en,sv,cjk'
+vim.o.spellsuggest = 'best,9'
+vim.o.spell = true
+
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.cmd [[colorscheme onedark]]
@@ -176,6 +185,11 @@ require('lualine').setup {
     section_separators = '',
   },
 }
+
+-- Setup terminal
+require('nvim-terminal').setup({
+  toggle_keymap = '<leader>t'
+})
 
 -- Enable buffeline
 vim.opt.termguicolors = true
