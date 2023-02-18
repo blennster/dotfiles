@@ -43,6 +43,12 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
+  -- Bufferline
+  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
+
+  -- Cursorline
+  use 'yamatsum/nvim-cursorline'
+
   -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
@@ -162,6 +168,23 @@ require('lualine').setup {
   },
 }
 
+-- Enable buffeline
+vim.opt.termguicolors=true
+require('bufferline').setup{}
+
+-- Enable cursorline
+require('nvim-cursorline').setup {
+  cursorline = {
+    enable = true,
+    timeout = 0,
+    number = 10,
+  },
+  cursorword = {
+    enable = true,
+    min_length = 3,
+    hl = { underline = true },
+  }
+}
 -- Enable Comment.nvim
 require('Comment').setup()
 
@@ -211,6 +234,7 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -311,6 +335,8 @@ local on_attach = function(_, bufnr)
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>gs', require('telescope.builtin').lsp_document_symbols, '[G]oto document [S]ymbols')
+  nmap('<leader>gS', require('telescope.builtin').lsp_document_symbols, '[G]oto workspace [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
@@ -343,7 +369,7 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
