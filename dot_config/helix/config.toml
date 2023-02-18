@@ -1,0 +1,14 @@
+theme="dark"
+
+[editor]
+color-modes=true
+cursorline=true
+
+[editor.cursor-shape]
+insert="bar"
+
+[editor.lsp]
+display-messages=true
+
+[editor.indent-guides]
+render=true
