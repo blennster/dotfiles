@@ -7,6 +7,13 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+-- Correct spelling with z=
+-- Add good word with zg
+-- navigate with ]s and [s
+vim.cmd [[set spelllang=en,sv,cjk]]
+vim.cmd [[set spellsuggest=best,9]]
+vim.cmd [[set spell]]
+
 require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
@@ -17,6 +24,8 @@ require('packer').startup(function(use)
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
+      'jay-babu/mason-null-ls.nvim',
+      'jose-elias-alvarez/null-ls.nvim',
 
       -- Useful status updates for LSP
       'j-hui/fidget.nvim',
@@ -44,7 +53,7 @@ require('packer').startup(function(use)
   }
 
   -- Bufferline
-  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
+  use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
 
   -- Cursorline
   use 'yamatsum/nvim-cursorline'
@@ -169,8 +178,8 @@ require('lualine').setup {
 }
 
 -- Enable buffeline
-vim.opt.termguicolors=true
-require('bufferline').setup{}
+vim.opt.termguicolors = true
+require('bufferline').setup {}
 
 -- Enable cursorline
 require('nvim-cursorline').setup {
@@ -403,6 +412,18 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+-- Setup formatters
+require('mason-null-ls').setup({
+  ensure_installed = { 'yamlfmt' },
+  automatic_setup = true,
+})
+
+-- Load formatters
+require 'mason-null-ls'.setup_handlers()
+
+-- Format on save
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
 
 -- Turn on lsp status information
 require('fidget').setup()
