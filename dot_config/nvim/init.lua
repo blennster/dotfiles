@@ -377,7 +377,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-
+  yamlls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
