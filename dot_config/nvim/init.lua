@@ -68,7 +68,8 @@ require('packer').startup(function(use)
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
-  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  -- use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  use 'Mofiqul/vscode.nvim'
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
@@ -146,9 +147,13 @@ vim.o.spelllang = 'en,sv,cjk'
 vim.o.spellsuggest = 'best,9'
 vim.o.spell = true
 
+vim.o.cursorline = true
+
+vim.g.vscode_italic_comment = 1
+
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
+vim.cmd [[colorscheme vscode]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -184,7 +189,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'onedark',
+    theme = 'auto',
     component_separators = '|',
     section_separators = '',
   },
@@ -198,11 +203,17 @@ require('nvim-terminal').setup({
 -- Enable buffeline
 vim.opt.termguicolors = true
 require('bufferline').setup {}
+vim.keymap.set('n', ']b', ':BufferLineCycleNext<CR>', { desc = 'Cycle next [b]uffer' })
+vim.keymap.set('n', '[b', ':BufferLineCyclePrev<CR>', { desc = 'Cycle previous [b]uffer' })
+vim.keymap.set('n', '<leader>bn', ':BufferLineCycleNext<CR>', { desc = 'Cycle next [b]uffer' })
+vim.keymap.set('n', '<leader>bp', ':BufferLineCyclePrev<CR>', { desc = 'Cycle previous [b]uffer' })
+vim.keymap.set('n', '<leader>bb', ':BufferLinePick<CR>', { desc = 'Cycle previous [b]uffer' })
+
 
 -- Enable cursorline
 require('nvim-cursorline').setup {
   cursorline = {
-    enable = true,
+    enable = false,
     timeout = 0,
     number = 10,
   },
@@ -441,7 +452,7 @@ require('mason-null-ls').setup({
 require 'mason-null-ls'.setup_handlers()
 
 -- Format on save
-vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 -- Turn on lsp status information
 require('fidget').setup()
@@ -457,7 +468,7 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
@@ -476,8 +487,8 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      elseif luasnip.jumpable( -1) then
+        luasnip.jump( -1)
       else
         fallback()
       end
