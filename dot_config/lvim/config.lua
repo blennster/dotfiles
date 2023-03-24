@@ -12,7 +12,7 @@ vim.opt.relativenumber = true
 lvim.log.level = "info"
 lvim.format_on_save = {
   enabled = true,
-  pattern = "*.lua",
+  -- pattern = "*.lua",
   timeout = 1000,
 }
 -- to disable icons and use a minimalist setup, uncomment the following
@@ -27,10 +27,10 @@ lvim.keys.normal_mode["<Tab>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-Tab>"] = ":BufferLineCyclePrev<CR>"
 
 -- -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
+lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- lvim.builtin.which_key.mappings["/"] = { "<cmd>Telescope live_grep<CR>", "Live grep" }
-lvim.lsp.buffer_mappings.normal_mode["ss"] = { "<cmd>Telescope lsp_document_symbols<CR>", "Search symbols" }
+lvim.builtin.which_key.mappings["ss"] = { "<cmd>Telescope lsp_document_symbols<CR>", "Search symbols" }
 
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
@@ -81,6 +81,7 @@ local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
   -- { command = "stylua" },
   { command = "autopep8" },
+  { command = "prettier" },
   -- {
   --   command = "prettier",
   --   extra_args = { "--print-width", "100" },
@@ -103,16 +104,24 @@ formatters.setup({
 --       cmd = "TroubleToggle",
 --     },
 -- }
+lvim.plugins = {
+  "tpope/vim-surround",
+  -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
+  -- setup = function()
+  --    vim.o.timeoutlen = 500
+  -- end
+}
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.api.nvim_create_autocmd(
-  "BufEnter",
-  {
-    pattern = "*",
-    command = "normal zR",
-  }
-)
+-- This was annoying
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.api.nvim_create_autocmd(
+--   "BufEnter",
+--   {
+--     pattern = "*",
+--     command = "normal zR",
+--   }
+-- )
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {

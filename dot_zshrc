@@ -48,6 +48,10 @@ if [[ -d "$HOME/.cargo/bin" ]] ; then
 	export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+if [[ -d "$HOME/.ghcup/bin" ]] ; then
+	export PATH="$HOME/.ghcup/bin:$PATH"
+fi
+
 hx_path=$(builtin command -v helix)
 if [[ -n "$hx_path" ]] ; then
 	alias hx=helix
