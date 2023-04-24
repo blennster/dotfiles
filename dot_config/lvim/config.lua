@@ -17,7 +17,7 @@ lvim.log.level = "info"
 lvim.format_on_save = {
   enabled = true,
   -- pattern = "*.lua",
-  timeout = 1000,
+  timeout = 2000,
 }
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -180,7 +180,11 @@ lvim.plugins = {
         },
       }
     end
-  },
+  }, {
+  'kaarmu/typst.vim',
+  ft = 'typ',
+  lazy = false,
+}
   -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
   -- setup = function()
   --    vim.o.timeoutlen = 500
@@ -197,3 +201,10 @@ lvim.builtin.treesitter.rainbow.enable = true
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.typ",
+  callback = function()
+    require("lspconfig").typst_lsp.setup {}
+    vim.o.filetype = "typst"
+  end
+})
