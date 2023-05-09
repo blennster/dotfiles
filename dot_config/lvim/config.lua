@@ -12,12 +12,15 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
 
+vim.opt.clipboard = ""
+
+
 -- general
 lvim.log.level = "info"
 lvim.format_on_save = {
   enabled = true,
   -- pattern = "*.lua",
-  timeout = 2000,
+  timeout = 5000,
 }
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -30,11 +33,14 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<Tab>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-Tab>"] = ":BufferLineCyclePrev<CR>"
 
+lvim.builtin.telescope.defaults.file_ignore_patterns = { ".git", ".class$" }
+
 -- -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- lvim.builtin.which_key.mappings["/"] = { "<cmd>Telescope live_grep<CR>", "Live grep" }
 lvim.builtin.which_key.mappings["ss"] = { "<cmd>Telescope lsp_document_symbols<CR>", "Search symbols" }
+lvim.builtin.which_key.mappings["sj"] = { "<cmd>Telescope jumplist<CR>", "Search jumplist" }
 
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
@@ -43,7 +49,7 @@ lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
