@@ -134,7 +134,7 @@ format = "\\[[$symbol($version)]($style)\\]"
 format = "\\[[$symbol($version)]($style)\\]"
 
 [cmd_duration]
-format = "\\[[⏱ $duration]($style)\\]"
+format = "\\[[󰔛 $duration]($style)\\]"
 
 [cobol]
 format = "\\[[$symbol($version)]($style)\\]"
@@ -149,7 +149,7 @@ format = "\\[[$symbol($version)]($style)\\]"
 format = "\\[[$symbol($version)]($style)\\]"
 
 [dotnet]
-format = "\\[[$symbol($version)(🎯 $tfm)]($style)\\]"
+format = "\\[[$symbol($version)( $tfm)]($style)\\]"
 
 [erlang]
 format = "\\[[$symbol($version)]($style)\\]"
