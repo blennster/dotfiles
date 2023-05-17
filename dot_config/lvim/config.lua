@@ -20,7 +20,7 @@ lvim.log.level = "info"
 lvim.format_on_save = {
   enabled = true,
   -- pattern = "*.lua",
-  timeout = 5000,
+  timeout = 10000,
 }
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -41,6 +41,7 @@ lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without f
 -- lvim.builtin.which_key.mappings["/"] = { "<cmd>Telescope live_grep<CR>", "Live grep" }
 lvim.builtin.which_key.mappings["ss"] = { "<cmd>Telescope lsp_document_symbols<CR>", "Search symbols" }
 lvim.builtin.which_key.mappings["sj"] = { "<cmd>Telescope jumplist<CR>", "Search jumplist" }
+lvim.builtin.which_key.mappings["j"] = { "<cmd>Telescope jumplist<CR>", "Jumplist" }
 
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
@@ -116,8 +117,12 @@ formatters.setup({
 --     },
 -- }
 lvim.plugins = {
-  "tpope/vim-surround",
-  "mrjones2014/nvim-ts-rainbow",
+  { "tpope/vim-surround" },
+  -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
+  -- setup = function()
+  --    vim.o.timeoutlen = 500
+  -- end
+  { "mrjones2014/nvim-ts-rainbow" },
   {
     "rmagatti/goto-preview",
     config = function()
@@ -176,7 +181,6 @@ lvim.plugins = {
             -- extended to include preceding or succeeding whitespace. Succeeding
             -- whitespace has priority in order to act similarly to eg the built-in
             -- `ap`.
-            --
             -- Can also be a function which gets passed a table with the keys
             -- * query_string: eg '@function.inner'
             -- * selection_mode: eg 'v'
@@ -187,17 +191,13 @@ lvim.plugins = {
       }
     end
   }, {
-  'kaarmu/typst.vim',
-  ft = 'typ',
-  lazy = false,
+  "kaarmu/typst.vim",
+  ft = "typ",
+  lazy = false
+},
 }
-  -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
-  -- setup = function()
-  --    vim.o.timeoutlen = 500
-  -- end
-}
-lvim.builtin.treesitter.rainbow.enable = true
 
+lvim.builtin.treesitter.rainbow.enable = true
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {
