@@ -14,13 +14,12 @@ vim.opt.foldenable = false
 
 vim.opt.clipboard = ""
 
-
 -- general
 lvim.log.level = "info"
 lvim.format_on_save = {
   enabled = true,
   -- pattern = "*.lua",
-  timeout = 10000,
+  timeout = 7000,
 }
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -55,7 +54,7 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
 
--- lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.ignore_install = { "haskell" }
 
 -- -- always installed on startup, useful for parsers without a strict filetype
 -- lvim.builtin.treesitter.ensure_installed = { "comment", "markdown_inline", "regex" }
@@ -118,12 +117,8 @@ formatters.setup({
 --     },
 -- }
 lvim.plugins = {
-  { "tpope/vim-surround" },
-  -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
-  -- setup = function()
-  --    vim.o.timeoutlen = 500
-  -- end
-  { "mrjones2014/nvim-ts-rainbow" },
+  "tpope/vim-surround",
+  "HiPhish/nvim-ts-rainbow2",
   {
     "rmagatti/goto-preview",
     config = function()
@@ -182,6 +177,7 @@ lvim.plugins = {
             -- extended to include preceding or succeeding whitespace. Succeeding
             -- whitespace has priority in order to act similarly to eg the built-in
             -- `ap`.
+            --
             -- Can also be a function which gets passed a table with the keys
             -- * query_string: eg '@function.inner'
             -- * selection_mode: eg 'v'
@@ -192,13 +188,13 @@ lvim.plugins = {
       }
     end
   }, {
-  "kaarmu/typst.vim",
-  ft = "typ",
-  lazy = false
-},
+  'kaarmu/typst.vim',
+  ft = 'typ',
+  lazy = true,
 }
-
+}
 lvim.builtin.treesitter.rainbow.enable = true
+
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {
@@ -208,10 +204,3 @@ lvim.builtin.treesitter.rainbow.enable = true
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
-vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
-  pattern = "*.typ",
-  callback = function()
-    vim.bo.filetype = "typst"
-    require("lspconfig").typst_lsp.setup {}
-  end
-})
