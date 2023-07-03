@@ -93,6 +93,7 @@ local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
   -- { command = "stylua" },
   { command = "autopep8", filetypes = { "python" } },
+  { command = "yamlfmt",  filetypes = { "yaml" } },
   { command = "prettier" },
   -- {
   --   command = "prettier",
@@ -207,10 +208,10 @@ lvim.builtin.treesitter.rainbow.enable = true
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
   pattern = "*.typ",
   callback = function()
+    vim.bo.filetype = "typst"
     require("lspconfig").typst_lsp.setup {}
-    vim.o.filetype = "typst"
   end
 })
