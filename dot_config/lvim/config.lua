@@ -54,7 +54,7 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
 
-lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.ignore_install = { "haskell", "kotlin_language_server" }
 
 -- -- always installed on startup, useful for parsers without a strict filetype
 -- lvim.builtin.treesitter.ensure_installed = { "comment", "markdown_inline", "regex" }
@@ -191,6 +191,9 @@ lvim.plugins = {
   'kaarmu/typst.vim',
   ft = 'typ',
   lazy = true,
+}, {
+  'nmac427/guess-indent.nvim',
+  config = function() require('guess-indent').setup {} end,
 }
 }
 lvim.builtin.treesitter.rainbow.enable = true

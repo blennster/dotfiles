@@ -52,6 +52,11 @@ if [[ -d "$HOME/.ghcup/bin" ]] ; then
 	export PATH="$HOME/.ghcup/bin:$PATH"
 fi
 
+if [[ -d "/opt/android-sdk" ]] ; then
+	export ANDROID_HOME="/opt/android-sdk"
+fi
+
+
 hx_path=$(builtin command -v helix)
 if [[ -n "$hx_path" ]] ; then
 	alias hx=helix
