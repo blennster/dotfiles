@@ -30,6 +30,7 @@
     neovim
     ripgrep
     wget
+    ffmpeg
 
     firefox
 
@@ -42,10 +43,13 @@
     # Kde specific
     libsForQt5.breeze-gtk
     libsForQt5.breeze-qt5
+    libsForQt5.ffmpegthumbs
     libsForQt5.filelight
     libsForQt5.kde-gtk-config
+    libsForQt5.kdegraphics-thumbnailers
 
     # Desktop
+    ffmpegthumbnailer
     easyeffects
     hunspell
     hunspellDicts.sv-se
@@ -147,6 +151,7 @@
   systemd.user.units = {
     "kde-baloo.service".enable = false;
   };
+  services.fstrim.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.emil = {

@@ -12,7 +12,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "ms7b86"; # Define your hostname.
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
@@ -22,6 +22,10 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/de4b7a47-f41c-4240-8355-e4eab1a525e8";
     fsType = "ext4";
+    options = [
+      "defaults"
+      "noatime"
+    ];
   };
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/71E4-F1B3";
