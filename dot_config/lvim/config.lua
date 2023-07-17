@@ -2,10 +2,6 @@
  THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
  `lvim` is the global options object
 ]]
--- vim options
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-
 vim.opt.relativenumber = true
 
 vim.opt.foldmethod = "expr"
@@ -54,7 +50,7 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
 
-lvim.builtin.treesitter.ignore_install = { "haskell", "kotlin_language_server" }
+-- lvim.builtin.treesitter.ignore_install = { "haskell", " }
 
 -- -- always installed on startup, useful for parsers without a strict filetype
 -- lvim.builtin.treesitter.ensure_installed = { "comment", "markdown_inline", "regex" }
@@ -62,14 +58,13 @@ lvim.builtin.treesitter.ignore_install = { "haskell", "kotlin_language_server" }
 -- -- generic LSP settings <https://www.lunarvim.org/docs/languages#lsp-support>
 
 -- --- disable automatic installation of servers
--- lvim.lsp.installer.setup.automatic_installation = false
+lvim.lsp.installer.setup.automatic_installation = false
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pyright", opts)
---
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "lua_ls" })
+local opts = {}                                   -- check the lspconfig documentation for a list of all possible options
+require("lvim.lsp.manager").setup("lua_ls", opts) -- use system lsp
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
@@ -91,23 +86,26 @@ lvim.builtin.treesitter.ignore_install = { "haskell", "kotlin_language_server" }
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
   -- { command = "stylua" },
-  { command = "autopep8", filetypes = { "python" } },
-  { command = "yamlfmt",  filetypes = { "yaml" } },
-  { command = "prettier" },
-  -- {
-  --   command = "prettier",
-  --   extra_args = { "--print-width", "100" },
-  --   filetypes = { "typescript", "typescriptreact" },
-  -- },
+  { command = "autopep8",  filetypes = { "python" } },
+  { command = "yamlfmt",   filetypes = { "yaml" } },
+  { command = "alejandra", filetypes = { "nix" } },
+  {
+    command = "prettier",
+    filetypes = {
+      "markdown", "typescript", "typescriptreact", "javascript",
+      "javascriptreact", "graphql", "html", "vue", "angular"
+    }
+  },
 })
--- local linters = require "lvim.lsp.null-ls.linters"
--- linters.setup {
---   { command = "flake8", filetypes = { "python" } },
--- {
---   command = "shellcheck",
---   args = { "--severity", "warning" },
--- },
--- }
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { command = "flake8", filetypes = { "python" } },
+  {
+    command = "shellcheck",
+    -- args = { "--severity", "warning" },
+    filetypes = { "sh", "bash" }
+  },
+}
 
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
 -- lvim.plugins = {

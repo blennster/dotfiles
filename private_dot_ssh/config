@@ -1,5 +1,0 @@
-Host *
-  SetEnv TERM=xterm-256color
-Host aur.archlinux.org
-  IdentityFile ~/.ssh/aur
-  User aur
