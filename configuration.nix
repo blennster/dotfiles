@@ -18,56 +18,55 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    bmon
-    btop
     curl
-    fd
     file
     git
-    gnupg
-    pinentry-qt # Remove qt for gtk version
-    htop
-    neovim
-    ripgrep
     wget
-    ffmpeg
 
     firefox
 
     (pkgs.callPackage "${builtins.fetchTarball "https://github.com/ryantm/agenix/archive/main.tar.gz"}/pkgs/agenix.nix" {})
   ];
-  environment.defaultPackages = with pkgs; [
-    nmap
-    linuxPackages_latest.cpupower
+  environment.defaultPackages = with pkgs;
+    [
+      nmap
+      linuxPackages_latest.cpupower
+      gnupg
+      pinentry-qt # Remove qt for gtk version
+      ffmpeg
 
-    # Kde specific
-    libsForQt5.breeze-gtk
-    libsForQt5.breeze-qt5
-    libsForQt5.ffmpegthumbs
-    libsForQt5.filelight
-    libsForQt5.kde-gtk-config
-    libsForQt5.kdegraphics-thumbnailers
+      # Kde specific, make sure to check -qt versions
+      libsForQt5.breeze-gtk
+      libsForQt5.ffmpegthumbs
+      libsForQt5.breeze-qt5
+      libsForQt5.filelight
+      libsForQt5.kde-gtk-config
+      libsForQt5.kdegraphics-thumbnailers
+      libsForQt5.kdeconnect-kde
+      syncthingtray
 
-    # Desktop
-    ffmpegthumbnailer
-    easyeffects
-    hunspell
-    hunspellDicts.sv-se
-    libreoffice-qt
-    power-profiles-daemon
-    wl-clipboard
-    wl-clipboard-x11
-    (writeShellScriptBin "install-home-manager" ''
-      version="release-${config.system.nixos.release}"
-      if [[ "$version" = "nixos-unstable" ]]; then
-        version=master
-      fi
-      sudo nix-channel --add https://github.com/nix-community/home-manager/archive/''${version}.tar.gz home-manager
-      sudo nix-channel --update
-    '')
-  ];
-
-  programs.kdeconnect.enable = true;
+      # Desktop
+      nextcloud-client
+      syncthing
+      ffmpegthumbnailer
+      easyeffects
+      hunspell
+      hunspellDicts.sv-se
+      libreoffice-qt
+      power-profiles-daemon
+      wl-clipboard
+      wl-clipboard-x11
+      (writeShellScriptBin "install-home-manager" ''
+        version="release-${config.system.nixos.release}"
+        if [[ "$version" = "nixos-unstable" ]]; then
+          version=master
+        fi
+        sudo nix-channel --add https://github.com/nix-community/home-manager/archive/''${version}.tar.gz home-manager
+        sudo nix-channel --update
+        nix-shell '<home-manager>' -A install
+      '')
+    ]
+    ++ (import ./pkgs.nix pkgs).tools;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -159,9 +158,7 @@
     description = "Emil Blennow";
     extraGroups = ["networkmanager" "wheel"];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      kate
-    ];
+    # packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -178,12 +175,30 @@
   # List services that you want to enable:
   services.tailscale.enable = true;
 
+  # Use tailscale-hosts --nix for updated list
+  # vim tip: use :r !tailscale-hosts --nix
+  networking.hosts = {
+    "100.116.16.27" = "ach6";
+    "100.74.247.27" = "debianserver";
+    "100.108.47.11" = "desktop-hamps";
+    "100.66.69.105" = "desktop-npudbg9";
+    "100.95.105.60" = "diddik";
+    "100.90.10.122" = "emils-s22";
+    "100.123.71.25" = "endeavour";
+    "100.101.102.103" = "hello";
+    "100.74.37.89" = "ms7b86-1";
+    "100.101.232.128" = "ms7b86";
+    "100.68.96.14" = "raspberrypi";
+  };
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.tailscale0 = {
+  };
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

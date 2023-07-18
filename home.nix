@@ -11,68 +11,36 @@
   # introduces backwards incompatible changes.
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
-  home.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["IosevkaTerm"];})
+  home.packages = with pkgs;
+    [
+      (nerdfonts.override {fonts = ["IosevkaTerm"];})
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-    (writeShellScriptBin "setup-flatpak" ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-      flatpak install -y flathub com.discordapp.Discord
-      flatpak install -y flathub com.spotify.Client
-    '')
-    (writeShellScriptBin "hm" ''
-      (cd ~/.config/home-manager && $SHELL -i)
-    '')
-    nextcloud-client
-    syncthing
-    syncthingtray
-    jq
+      (writeShellScriptBin "hm" ''
+        (cd ~/.config/home-manager && $SHELL -i)
+      '')
+      (writeShellScriptBin "install-flatpak-pkgs" ''
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+        flatpak install -y flathub com.discordapp.Discord
+        flatpak install -y flathub com.spotify.Client
+      '')
+      (writeShellScriptBin "install-lvim" ''
+        echo "Make sure to not install extensions, they are managed in hm"
+        LV_BRANCH='release-1.3/neovim-0.9' \
+        bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh) -- \
+        --no-install-dependencies
+      '')
 
-    grml-zsh-config
+      grml-zsh-config
+    ]
+    ++ (import ./pkgs.nix pkgs).tools
+    ++ (import ./pkgs.nix pkgs).prog
+    ++ (import ./pkgs.nix pkgs).nvim;
 
-    gcc
-    rustc
-    nodejs
-    gnumake
-
-    cargo
-
-    # Nvim deps
-    python310
-    python310Packages.pynvim
-    nodePackages.neovim
-
-    # Lsps and the like
-    alejandra
-    lua-language-server
-    nil
-    nodePackages.bash-language-server
-    nodePackages.vscode-json-languageserver
-    nodePackages.yaml-language-server
-    nodePackages.prettier
-    shellcheck
-  ];
-
-  programs.go.enable = true;
   programs.firefox.enable = true;
-  # programs.nextcloud-client.enable = true;
-  # programs.syncthing = {
-  #   enable = true;
-  #   tray = true;
-  # };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
     ".config" = {
       recursive = true;
       source = ./dot_config;
@@ -92,7 +60,7 @@
     # syntaxHighlighting.enable = true;
     enableSyntaxHighlighting = true;
     initExtraFirst = ''
-      source $HOME/.nix-profile/etc/zsh/zshrc
+      source $HOME/.nix-profile/etc/zsh/zshrc # Load grml
       prompt off
     '';
   };
@@ -125,6 +93,24 @@
   };
   programs.kitty = {
     enable = true;
+    font = {
+      package = pkgs.nerdfonts.override {fonts = ["IosevkaTerm"];};
+      name = "IosevkaTerm NFM";
+      size = 13;
+    };
+    keybindings = {
+      "alt+1" = "goto_tab 1";
+      "alt+2" = "goto_tab 2";
+      "alt+3" = "goto_tab 3";
+      "alt+4" = "goto_tab 4";
+      "alt+5" = "goto_tab 5";
+      "alt+6" = "goto_tab 6";
+      "alt+7" = "goto_tab 7";
+      "alt+8" = "goto_tab 8";
+      "alt+9" = "goto_tab 9";
+      "kitty_mod+t" = "new_tab_with_cwd";
+      "kitty_mod+enter" = "new_window_with_cwd";
+    };
   };
   programs.git = {
     enable = true;

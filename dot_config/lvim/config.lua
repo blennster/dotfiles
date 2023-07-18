@@ -17,8 +17,6 @@ lvim.format_on_save = {
   -- pattern = "*.lua",
   timeout = 7000,
 }
--- to disable icons and use a minimalist setup, uncomment the following
--- lvim.use_icons = false
 
 -- keymappings <https://www.lunarvim.org/docs/configuration/keybindings>
 lvim.leader = "space"
@@ -37,9 +35,7 @@ lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without f
 lvim.builtin.which_key.mappings["ss"] = { "<cmd>Telescope lsp_document_symbols<CR>", "Search symbols" }
 lvim.builtin.which_key.mappings["sj"] = { "<cmd>Telescope jumplist<CR>", "Search jumplist" }
 lvim.builtin.which_key.mappings["j"] = { "<cmd>Telescope jumplist<CR>", "Jumplist" }
-
--- -- Change theme settings
--- lvim.colorscheme = "lunar"
+lvim.builtin.which_key.vmappings["ts"] = { ":'<,'>:sort<CR>", "Sort lines" }
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -49,8 +45,6 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
 
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
-
--- lvim.builtin.treesitter.ignore_install = { "haskell", " }
 
 -- -- always installed on startup, useful for parsers without a strict filetype
 -- lvim.builtin.treesitter.ensure_installed = { "comment", "markdown_inline", "regex" }
@@ -85,7 +79,6 @@ require("lvim.lsp.manager").setup("lua_ls", opts) -- use system lsp
 -- -- linters and formatters <https://www.lunarvim.org/docs/languages#lintingformatting>
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-  -- { command = "stylua" },
   { command = "autopep8",  filetypes = { "python" } },
   { command = "yamlfmt",   filetypes = { "yaml" } },
   { command = "alejandra", filetypes = { "nix" } },
@@ -96,6 +89,7 @@ formatters.setup({
       "javascriptreact", "graphql", "html", "vue", "angular"
     }
   },
+  { command = "shfmt", filetypes = { "bash", "sh" } }
 })
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
@@ -107,16 +101,14 @@ linters.setup {
   },
 }
 
--- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
--- lvim.plugins = {
---     {
---       "folke/trouble.nvim",
---       cmd = "TroubleToggle",
---     },
--- }
 lvim.plugins = {
   "tpope/vim-surround",
-  "HiPhish/nvim-ts-rainbow2",
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    config = function()
+      require('rainbow-delimiters.setup') {}
+    end
+  },
   {
     "rmagatti/goto-preview",
     config = function()
@@ -185,17 +177,17 @@ lvim.plugins = {
         },
       }
     end
-  }, {
-  'kaarmu/typst.vim',
-  ft = 'typ',
-  lazy = true,
-}, {
-  'nmac427/guess-indent.nvim',
-  config = function() require('guess-indent').setup {} end,
+  },
+  {
+    'kaarmu/typst.vim',
+    ft = 'typ',
+    lazy = true,
+  },
+  {
+    'nmac427/guess-indent.nvim',
+    config = function() require('guess-indent').setup {} end,
+  }
 }
-}
-lvim.builtin.treesitter.rainbow.enable = true
-
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {
