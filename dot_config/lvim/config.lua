@@ -82,7 +82,11 @@ require("lvim.lsp.manager").setup("lua_ls", opts) -- use system lsp
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
   { command = "autopep8",  filetypes = { "python" } },
-  { command = "yamlfmt",   filetypes = { "yaml" } },
+  {
+    command = "yamlfmt",
+    filetypes = { "yaml" },
+    extra_args = { "-formatter", "retain_line_breaks=true,indentless_arrays=false" },
+  },
   { command = "alejandra", filetypes = { "nix" } },
   {
     command = "prettier",
@@ -213,7 +217,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.sls",
   callback = function()
-    vim.o.filetype = "yaml"
+    vim.o.filetype = "sls.yaml"
   end
 })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {

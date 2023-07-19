@@ -15,6 +15,7 @@
     go
     nodejs
     rustc
+    libstdcxx5
   ];
   nvim = with pkgs; [
     python310
