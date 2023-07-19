@@ -3,8 +3,7 @@
   pkgs,
   ...
 }: {
-  home.username = "emil";
-  home.homeDirectory = "/home/emil";
+  imports = ["./localhome.nix"];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
