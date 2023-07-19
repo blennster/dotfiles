@@ -36,14 +36,17 @@ lvim.builtin.which_key.mappings["ss"] = { "<cmd>Telescope lsp_document_symbols<C
 lvim.builtin.which_key.mappings["sj"] = { "<cmd>Telescope jumplist<CR>", "Search jumplist" }
 lvim.builtin.which_key.mappings["j"] = { "<cmd>Telescope jumplist<CR>", "Jumplist" }
 lvim.builtin.which_key.vmappings["ts"] = { ":'<,'>:sort<CR>", "Sort lines" }
+lvim.builtin.which_key.mappings["b,"] = { ":BufferLineMovePrev<CR>", "Move buffer left" }
+lvim.builtin.which_key.mappings["b."] = { ":BufferLineMoveNext<CR>", "Move buffer right" }
+
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
+lvim.builtin.telescope.defaults.file_ignore_patterns = { ".git" }
 
--- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
 
 -- -- always installed on startup, useful for parsers without a strict filetype
@@ -51,7 +54,6 @@ lvim.builtin.treesitter.auto_install = true
 
 -- -- generic LSP settings <https://www.lunarvim.org/docs/languages#lsp-support>
 
--- --- disable automatic installation of servers
 lvim.lsp.installer.setup.automatic_installation = false
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
@@ -84,12 +86,14 @@ formatters.setup({
   { command = "alejandra", filetypes = { "nix" } },
   {
     command = "prettier",
+    extra_args = { "--tab-width", 4 },
     filetypes = {
       "markdown", "typescript", "typescriptreact", "javascript",
       "javascriptreact", "graphql", "html", "vue", "angular"
     }
   },
-  { command = "shfmt", filetypes = { "bash", "sh" } }
+  { command = "shfmt",   filetypes = { "bash", "sh" } },
+  { command = "rustfmt", extra_args = { "--edition", "2021" }, filetypes = { "rust" } }
 })
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
@@ -197,3 +201,43 @@ lvim.plugins = {
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+-- vim.api.nvim_create_autocmd("FileType", {
+--
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "zsh",
+  callback = function()
+    -- let treesitter use bash highlight for zsh files as well
+    require("nvim-treesitter.highlight").attach(0, "bash")
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.sls",
+  callback = function()
+    vim.o.filetype = "yaml"
+  end
+})
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "Android.bp",
+  callback = function()
+    vim.o.filetype = "bzl"
+  end
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "toml",
+  callback = function()
+    require("lvim.lsp.manager").setup("taplo", {})
+  end
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "proto",
+  callback = function()
+    require("lvim.lsp.manager").setup("bufls", {})
+  end
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "json",
+  callback = function()
+    vim.o.ts = 4
+    vim.o.sw = 4
+  end
+})
