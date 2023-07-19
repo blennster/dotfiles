@@ -13,7 +13,7 @@
       (nerdfonts.override {fonts = ["IosevkaTerm"];})
 
       (writeShellScriptBin "hm" ''
-        (cd ~/.config/home-manager && $SHELL -i)
+        (cd ~/.config/home-manager && zsh -i)
       '')
       (writeShellScriptBin "install-flatpak-pkgs" ''
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -28,6 +28,7 @@
       '')
 
       grml-zsh-config
+      zsh-fast-syntax-highlighting
     ]
     ++ (import ./pkgs.nix pkgs).tools
     ++ (import ./pkgs.nix pkgs).prog
@@ -42,7 +43,6 @@
       recursive = true;
       source = ./dot_config;
     };
-    ".gnupg/gpg-agent.conf".text = "pinentry-program /run/current-system/sw/bin/pinentry";
     ".local/bin" = {
       recursive = true;
       executable = true;
@@ -55,9 +55,9 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     # syntaxHighlighting.enable = true;
-    enableSyntaxHighlighting = true;
     initExtraFirst = ''
       source $HOME/.nix-profile/etc/zsh/zshrc # Load grml
+      source $HOME/.nix-profile/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
       prompt off
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
     '';
@@ -82,9 +82,6 @@
   programs.home-manager.enable = true;
   xdg.enable = true;
 
-  programs.ssh = {
-    matchBlocks. "*".setEnv = "SetEnv TERM=xterm-256color";
-  };
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -108,17 +105,11 @@
       "alt+9" = "goto_tab 9";
       "kitty_mod+t" = "new_tab_with_cwd";
       "kitty_mod+enter" = "new_window_with_cwd";
+      "kitty_mod+right" = "next_window";
+      "kitty_mod+down" = "next_window";
+      "kitty_mod+left" = "previous_window";
+      "kitty_mod+up" = "previous_window";
     };
-  };
-  programs.git = {
-    enable = true;
-    userName = "Emil Blennow";
-    userEmail = "emil.blennow99@gmail.com";
-    signing = {
-      key = "6E04DBAAC117B125";
-      signByDefault = true;
-    };
-    extraConfig = {init = {defaultBranch = "main";};};
   };
   programs.lazygit = {
     enable = true;
