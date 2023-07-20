@@ -70,7 +70,7 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 		else
 			# No suffix
 			if [[ $NIX = "true" ]]; then
-				echo "$hosts" | awk '{print "\""$1"\" = \""$2"\";"}'
+				echo "$hosts" | awk '{print "\""$1"\" = [\""$2"\"];"}'
 			else
 				echo "$hosts"
 			fi
