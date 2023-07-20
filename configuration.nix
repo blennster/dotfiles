@@ -5,7 +5,12 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  kdeconnect_ports = {
+    from = 1714;
+    to = 1764;
+  };
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -32,27 +37,38 @@
       nmap
       linuxPackages_latest.cpupower
       gnupg
-      pinentry-qt # Remove qt for gtk version
       ffmpeg
 
       # Kde specific, make sure to check -qt versions
-      libsForQt5.breeze-gtk
-      libsForQt5.ffmpegthumbs
-      libsForQt5.breeze-qt5
-      libsForQt5.filelight
-      libsForQt5.kde-gtk-config
-      libsForQt5.kdegraphics-thumbnailers
-      libsForQt5.kdeconnect-kde
-      syncthingtray
+      # libsForQt5.breeze-gtk
+      # libsForQt5.ffmpegthumbs
+      # libsForQt5.breeze-qt5
+      # libsForQt5.filelight
+      # libsForQt5.kde-gtk-config
+      # libsForQt5.kdegraphics-thumbnailers
+      # libsForQt5.kdeconnect-kde
+      # syncthingtray
+      # nextcloud-client
+      # pinentry-qt
+
+      # Gnome specific
+      gnomeExtensions.gsconnect
+      gnomeExtensions.appindicator
+      gnomeExtensions.syncthing-indicator
+      gnome.dconf-editor
+      pavucontrol
+      pinentry-gnome
+
+      docker-compose
 
       # Desktop
-      nextcloud-client
+      vlc
       syncthing
       ffmpegthumbnailer
       easyeffects
       hunspell
       hunspellDicts.sv-se
-      libreoffice-qt
+      libreoffice
       power-profiles-daemon
       wl-clipboard
       wl-clipboard-x11
@@ -67,6 +83,13 @@
       '')
     ]
     ++ (import ./pkgs.nix pkgs).tools;
+  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+
+  virtualisation.docker.enable = true;
+  virtualisation.podman = {
+    enable = false; # sorry
+    dockerCompat = true;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -100,17 +123,39 @@
   services.flatpak.enable = true;
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "wl";
-    GTK_THEME = "Breeze"; # KDE, also gets set with dconf
+    # GTK_THEME = "Breeze"; # KDE, also gets set with dconf
   };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.defaultSession = "plasmawayland";
-  services.xserver.desktopManager.plasma5.enable = true;
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.displayManager.defaultSession = "plasmawayland";
+  # services.xserver.desktopManager.plasma5.enable = true;
+
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
   programs.dconf.enable = true;
+
+  environment.gnome.excludePackages =
+    (with pkgs; [
+      # gnome-photos
+      gnome-tour
+    ])
+    ++ (with pkgs.gnome; [
+      # gnome-music
+      gnome-software
+      epiphany # web browser
+      geary # email reader
+      gnome-characters
+      totem # video player
+      tali # poker game
+      iagno # go game
+      hitori # sudoku game
+      atomix # puzzle game
+    ]);
+
   xdg.portal.enable = true;
 
   # Configure keymap in X11
@@ -144,19 +189,19 @@
   environment.pathsToLink = ["/share/zsh"];
   programs.zsh.enable = true;
 
-  systemd.units = {
-    "kde-baloo.service".enable = false;
-  };
-  systemd.user.units = {
-    "kde-baloo.service".enable = false;
-  };
+  # systemd.units = {
+  #   "kde-baloo.service".enable = false;
+  # };
+  # systemd.user.units = {
+  #   "kde-baloo.service".enable = false;
+  # };
   services.fstrim.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.emil = {
     isNormalUser = true;
     description = "Emil Blennow";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.zsh;
     # packages = with pkgs; [ ];
   };
@@ -178,17 +223,17 @@
   # Use tailscale-hosts --nix for updated list
   # vim tip: use :r !tailscale-hosts --nix
   networking.hosts = {
-    "100.116.16.27" = "ach6";
-    "100.74.247.27" = "debianserver";
-    "100.108.47.11" = "desktop-hamps";
-    "100.66.69.105" = "desktop-npudbg9";
-    "100.95.105.60" = "diddik";
-    "100.90.10.122" = "emils-s22";
-    "100.123.71.25" = "endeavour";
-    "100.101.102.103" = "hello";
-    "100.74.37.89" = "ms7b86-1";
-    "100.101.232.128" = "ms7b86";
-    "100.68.96.14" = "raspberrypi";
+    "100.116.16.27" = ["ach6"];
+    "100.74.247.27" = ["debianserver"];
+    "100.108.47.11" = ["desktop-hamps"];
+    "100.66.69.105" = ["desktop-npudbg9"];
+    "100.95.105.60" = ["diddik"];
+    "100.90.10.122" = ["emils-s22"];
+    "100.123.71.25" = ["endeavour"];
+    "100.101.102.103" = ["hello"];
+    "100.74.37.89" = ["ms7b86-1"];
+    "100.101.232.128" = ["ms7b86"];
+    "100.68.96.14" = ["raspberrypi"];
   };
 
   # Enable the OpenSSH daemon.
@@ -197,8 +242,13 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  networking.firewall.tailscale0 = {
+  networking.firewall.interfaces.tailscale0 = {
+    allowedUDPPorts = [];
+    allowedTCPPorts = [];
+    allowedUDPPortRanges = [kdeconnect_ports];
+    allowedTCPPortRanges = [kdeconnect_ports];
   };
+
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
