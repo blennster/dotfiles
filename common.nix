@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -110,6 +106,7 @@
       "kitty_mod+left" = "previous_window";
       "kitty_mod+up" = "previous_window";
     };
+    shellIntegration.enableZshIntegration = true;
   };
   programs.lazygit = {
     enable = true;

@@ -35,6 +35,7 @@
     nodePackages.prettier
     nodePackages.vscode-json-languageserver
     nodePackages.yaml-language-server
+    nodePackages.typescript-language-server
     yamlfmt
     rust-analyzer
     shellcheck
