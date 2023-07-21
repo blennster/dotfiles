@@ -1,8 +1,13 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   home.username = "s7000033439";
   home.homeDirectory = "/home/SONY/s7000033439";
 
   programs.kitty = {
+    package = pkgs.ripgrep; # Nix version of package does not work
     settings.shell = "/usr/bin/zsh";
     font.size = lib.mkForce 12;
   };
