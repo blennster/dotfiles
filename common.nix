@@ -39,6 +39,10 @@
       recursive = true;
       source = ./dot_config;
     };
+    ".local" = {
+      recursive = true;
+      source = ./dot_local;
+    };
     ".local/bin" = {
       recursive = true;
       executable = true;
