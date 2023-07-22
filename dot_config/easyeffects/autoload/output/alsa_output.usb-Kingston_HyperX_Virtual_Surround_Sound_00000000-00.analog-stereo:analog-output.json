@@ -1,0 +1,6 @@
+{
+    "device": "alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo",
+    "device-description": "HyperX 7.1 Audio Analog Stereo",
+    "device-profile": "analog-output",
+    "preset-name": "Hyper X Cloud II"
+}
