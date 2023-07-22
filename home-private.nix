@@ -20,11 +20,10 @@
   };
 
   dconf.settings = with lib.hm.gvariant; {
-    "org/gnome/extensions" = {
+    "org/gnome/shell" = {
       enabled-extensions = ["appindicatorsupport@rgcjonas.gmail.com" "gsconnect@andyholmes.github.io" "syncthing@gnome.2nv2u.com"];
+      favorite-apps = ["org.gnome.Calendar.desktop" "org.gnome.Nautilus.desktop" "firefox.desktop"];
     };
-    "org/gtk/settings/file-chooser" = {sort-directories-first = true;};
-    "org/gtk/gtk4/settings/file-chooser" = {sort-directories-first = true;};
     "org/gnome/desktop/wm/keybindings" = {
       switch-applications = ["<Super>Tab"];
       switch-applications-backward = ["<Shift><Super>Tab"];
@@ -49,6 +48,19 @@
       accel-profile = "flat";
     };
     "org/gnome/TextEditor" = {restore-session = false;};
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Control><Alt>t";
+      command = "kitty";
+      name = "Kitty";
+    };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      binding = "<Super>e";
+      command = "nautilus";
+      name = "Files";
+    };
+    "org/gnome/calculator" = {button-mode = "keyboard";};
+    "org/gtk/settings/file-chooser" = {sort-directories-first = true;};
+    "org/gtk/gtk4/settings/file-chooser" = {sort-directories-first = true;};
   };
   imports = [./common.nix];
 }
