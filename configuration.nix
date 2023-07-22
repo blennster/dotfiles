@@ -54,6 +54,7 @@ in {
       gnomeExtensions.gsconnect
       gnomeExtensions.appindicator
       gnomeExtensions.syncthing-indicator
+      gnomeExtensions.middle-click-to-close-in-overview
       gnome.dconf-editor
       pavucontrol
       pinentry-gnome
