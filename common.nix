@@ -44,8 +44,8 @@
       source = ./dot_local;
     };
     ".local/bin" = {
+      # executable = true; # This does not work, set executable in git instead
       recursive = true;
-      executable = true;
       source = ./bin;
     };
   };
