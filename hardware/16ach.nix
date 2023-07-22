@@ -25,8 +25,9 @@
   boot.kernelModules = ["kvm-amd" "amd_pstate"];
   boot.extraModulePackages = [];
   boot.kernelParams = [
-    "amd_pstate=guided"
+    "amd_pstate=active"
   ];
+  boot.resumeDevice = "/dev/disk/by-uuid/91d66b1d-8c3b-47cf-922a-5bd904b95c43";
   boot.initrd.systemd.enable = true;
   environment.systemPackages = [
     pkgs.tpm2-tss
@@ -55,7 +56,16 @@
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   services.xserver.videoDrivers = ["amdgpu"];
-
+  hardware.opengl = {
+    driSupport = true;
+    extraPackages = with pkgs; [
+      rocm-opencl-icd
+      rocm-opencl-runtime
+    ];
+  };
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
+  ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
