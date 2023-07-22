@@ -48,7 +48,6 @@ in {
       # libsForQt5.kdegraphics-thumbnailers
       # libsForQt5.kdeconnect-kde
       # syncthingtray
-      # nextcloud-client
       # pinentry-qt
 
       # Gnome specific
@@ -65,6 +64,7 @@ in {
       vlc
       syncthing
       ffmpegthumbnailer
+      nextcloud-client
       easyeffects
       hunspell
       hunspellDicts.sv-se
