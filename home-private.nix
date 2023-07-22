@@ -12,7 +12,8 @@
     extraConfig = {init = {defaultBranch = "main";};};
   };
   programs.ssh = {
-    matchBlocks. "*".setEnv = "SetEnv TERM=xterm-256color";
+    enable = true;
+    matchBlocks."*" = {setEnv = {TERM = "xterm-256color";};};
   };
   home.file = {
     ".gnupg/gpg-agent.conf".text = "pinentry-program /run/current-system/sw/bin/pinentry";
