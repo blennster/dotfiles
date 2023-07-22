@@ -79,6 +79,7 @@ in {
         fi
         sudo nix-channel --add https://github.com/nix-community/home-manager/archive/''${version}.tar.gz home-manager
         sudo nix-channel --update
+        git clone --branch nix git@github.com:blennster/dotfiles $HOME/.config/home-manager
         nix-shell '<home-manager>' -A install
       '')
     ]
