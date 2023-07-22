@@ -224,16 +224,13 @@ in {
   # Use tailscale-hosts --nix for updated list
   # vim tip: use :r !tailscale-hosts --nix
   networking.hosts = {
-    "100.116.16.27" = ["ach6"];
+    "100.90.124.136" = ["16ach"];
     "100.74.247.27" = ["debianserver"];
-    "100.108.47.11" = ["desktop-hamps"];
     "100.66.69.105" = ["desktop-npudbg9"];
     "100.95.105.60" = ["diddik"];
     "100.90.10.122" = ["emils-s22"];
-    "100.123.71.25" = ["endeavour"];
     "100.101.102.103" = ["hello"];
-    "100.74.37.89" = ["ms7b86-1"];
-    "100.101.232.128" = ["ms7b86"];
+    "100.74.37.89" = ["ms7b86"];
     "100.68.96.14" = ["raspberrypi"];
   };
 
