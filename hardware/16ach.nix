@@ -4,8 +4,8 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
+  pkgs,
   ...
 }: {
   imports = [
@@ -13,8 +13,8 @@
   ];
   networking.hostName = "16ach"; # Define your hostname.
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci"];
-  boot.initrd.kernelModules = ["dm-snapshot" "amdgpu" "amd_pstate"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci" "amd_pstate"];
+  boot.initrd.kernelModules = ["dm-snapshot" "amdgpu"];
   boot.initrd.luks.devices = {
     root = {
       device = "/dev/disk/by-uuid/234044b6-40a8-4448-ab9a-6701f000b8c3";
@@ -24,6 +24,13 @@
   };
   boot.kernelModules = ["kvm-amd" "amd_pstate"];
   boot.extraModulePackages = [];
+  boot.kernelParams = [
+    "amd_pstate=guided"
+  ];
+  boot.initrd.systemd.enable = true;
+  environment.systemPackages = [
+    pkgs.tpm2-tss
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/45c42ab6-5288-460b-8ae8-8c047485f980";
