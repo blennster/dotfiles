@@ -13,7 +13,7 @@
   ];
   networking.hostName = "16ach"; # Define your hostname.
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci" "amd_pstate"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci"];
   boot.initrd.kernelModules = ["dm-snapshot" "amdgpu"];
   boot.initrd.luks.devices = {
     root = {
@@ -22,11 +22,8 @@
       allowDiscards = true;
     };
   };
-  boot.kernelModules = ["kvm-amd" "amd_pstate"];
+  boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
-  boot.kernelParams = [
-    "amd_pstate=active"
-  ];
   boot.resumeDevice = "/dev/disk/by-uuid/91d66b1d-8c3b-47cf-922a-5bd904b95c43";
   boot.initrd.systemd.enable = true;
   environment.systemPackages = [
