@@ -15,6 +15,12 @@
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "sdhci_pci"];
   boot.initrd.kernelModules = ["dm-snapshot" "amdgpu"];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
+  boot.resumeDevice = "/dev/disk/by-uuid/91d66b1d-8c3b-47cf-922a-5bd904b95c43";
+
+  # Luks config
+  # Enroll keys in tpm with systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0 /dev/<encrypted device>
   boot.initrd.luks.devices = {
     root = {
       device = "/dev/disk/by-uuid/234044b6-40a8-4448-ab9a-6701f000b8c3";
@@ -22,12 +28,9 @@
       allowDiscards = true;
     };
   };
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
-  boot.resumeDevice = "/dev/disk/by-uuid/91d66b1d-8c3b-47cf-922a-5bd904b95c43";
   boot.initrd.systemd.enable = true;
   environment.systemPackages = [
-    pkgs.tpm2-tss
+    pkgs.tpm2-tss # for systemd-cryptenroll
   ];
 
   fileSystems."/" = {
@@ -56,7 +59,14 @@
     enable = true;
     powertop.enable = true;
   };
+  environment.etc = {
+    "systemd/sleep.conf".text = ''
+      SuspendMode=suspend-then-hibernate
+      HibernateDelaySec=400
+    '';
+  };
 
+  # From AMD GPU page on wiki
   services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl = {
     driSupport = true;
@@ -68,6 +78,7 @@
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
   ];
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
