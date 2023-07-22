@@ -52,6 +52,11 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
+
   services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl = {
     driSupport = true;
