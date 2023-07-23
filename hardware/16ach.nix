@@ -59,12 +59,6 @@
     enable = true;
     powertop.enable = true;
   };
-  environment.etc = {
-    "systemd/sleep.conf".text = ''
-      SuspendMode=suspend-then-hibernate
-      HibernateDelaySec=400
-    '';
-  };
 
   # From AMD GPU page on wiki
   services.xserver.videoDrivers = ["amdgpu"];
