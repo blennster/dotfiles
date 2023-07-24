@@ -15,6 +15,7 @@
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         flatpak install -y flathub com.discordapp.Discord
         flatpak install -y flathub com.spotify.Client
+        flatpak install -y flathub com.github.tchx84.Flatseal
       '')
       (writeShellScriptBin "install-lvim" ''
         echo "Make sure to not install extensions, they are managed in hm"
