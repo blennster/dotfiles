@@ -55,17 +55,19 @@ in {
       gnomeExtensions.appindicator
       gnomeExtensions.syncthing-indicator
       gnomeExtensions.middle-click-to-close-in-overview
+      gnomeExtensions.gnome-clipboard
+      adw-gtk3
       gnome.dconf-editor
       pavucontrol
-      pinentry-gnome
+      # pinentry-gnome # use ssh signing instead
 
-      docker-compose
+      # docker-compose
+      podman-compose
 
       # Desktop
+      xdg-desktop-portal-gtk
       vlc
-      syncthing
       ffmpegthumbnailer
-      nextcloud-client
       easyeffects
       hunspell
       hunspellDicts.sv-se
@@ -74,6 +76,7 @@ in {
       wl-clipboard
       wl-clipboard-x11
       (writeShellScriptBin "install-home-manager" ''
+        set -eu
         version="release-${config.system.nixos.release}"
         if [[ "$version" = "nixos-unstable" ]]; then
           version=master
@@ -87,9 +90,9 @@ in {
     ++ (import ./pkgs.nix pkgs).tools;
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker.enable = false;
   virtualisation.podman = {
-    enable = false; # sorry
+    enable = true; # sorry
     dockerCompat = true;
   };
 
@@ -231,7 +234,7 @@ in {
     "100.95.105.60" = ["diddik"];
     "100.90.10.122" = ["emils-s22"];
     "100.101.102.103" = ["hello"];
-    "100.74.37.89" = ["ms7b86"];
+    "100.84.107.64" = ["ms7b86"];
     "100.68.96.14" = ["raspberrypi"];
   };
 

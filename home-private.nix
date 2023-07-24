@@ -16,13 +16,18 @@
     enable = true;
     matchBlocks."*" = {setEnv = {TERM = "xterm-256color";};};
   };
-  home.file = {
-    ".gnupg/gpg-agent.conf".text = "pinentry-program /run/current-system/sw/bin/pinentry";
-  };
+  services.syncthing.enable = true;
+  services.nextcloud-client.enable = true;
 
   dconf.settings = with lib.hm.gvariant; {
     "org/gnome/shell" = {
-      enabled-extensions = ["appindicatorsupport@rgcjonas.gmail.com" "gsconnect@andyholmes.github.io" "syncthing@gnome.2nv2u.com"];
+      enabled-extensions = [
+        "appindicatorsupport@rgcjonas.gmail.com"
+        "gsconnect@andyholmes.github.io"
+        "syncthing@gnome.2nv2u.com"
+        "middleclickclose@paolo.tranquilli.gmail.com"
+        "gnome-clipboard@b00f.github.io"
+      ];
       favorite-apps = ["org.gnome.Calendar.desktop" "org.gnome.Nautilus.desktop" "firefox.desktop"];
     };
     "org/gnome/desktop/wm/keybindings" = {
@@ -40,6 +45,8 @@
     };
     "org/gnome/desktop/interface" = {
       monospace-font-name = "IosevkaTerm NFM 12";
+      gtk-theme = "adw-gtk3-dark";
+      color-scheme = "prefer-dark";
     };
     "org/gnome/desktop/peripherals/touchpad" = {
       tap-to-click = true;
@@ -65,6 +72,8 @@
     "org/gnome/calculator" = {button-mode = "keyboard";};
     "org/gtk/settings/file-chooser" = {sort-directories-first = true;};
     "org/gtk/gtk4/settings/file-chooser" = {sort-directories-first = true;};
+    "org/gnome/mutter" = {edge-tiling = true;};
+    "org/gnome/desktop/sound" = {event-sounds = false;};
   };
   imports = [./common.nix];
 }
