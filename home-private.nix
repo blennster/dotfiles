@@ -5,11 +5,12 @@
     enable = true;
     userName = "Emil Blennow";
     userEmail = "emil.blennow99@gmail.com";
-    signing = {
-      key = "6E04DBAAC117B125";
-      signByDefault = true;
+    extraConfig = {
+      init = {defaultBranch = "main";};
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      user.signingkey = "~/.ssh/id_ed25519";
     };
-    extraConfig = {init = {defaultBranch = "main";};};
   };
   programs.ssh = {
     enable = true;
