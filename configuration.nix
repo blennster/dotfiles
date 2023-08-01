@@ -72,7 +72,6 @@ in {
       hunspell
       hunspellDicts.sv-se
       libreoffice
-      power-profiles-daemon
       wl-clipboard
       wl-clipboard-x11
       (writeShellScriptBin "install-home-manager" ''

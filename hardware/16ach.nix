@@ -59,6 +59,8 @@
     enable = true;
     powertop.enable = true;
   };
+  services.tlp.enable = true;
+  services.power-profiles-daemon.enable = false;
 
   # From AMD GPU page on wiki
   services.xserver.videoDrivers = ["amdgpu"];
