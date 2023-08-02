@@ -62,6 +62,16 @@
   services.tlp.enable = true;
   services.power-profiles-daemon.enable = false;
 
+  environment.defaultPackages = with pkgs; [
+    (writeShellScriptBin "batsave" ''
+      if [[ -n $1 && ($1 -eq 0 || $1 -eq 1) ]]; then
+        echo "$1" | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
+      else
+        cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
+      fi
+    '')
+  ];
+
   # From AMD GPU page on wiki
   services.xserver.videoDrivers = ["amdgpu"];
   hardware.opengl = {
