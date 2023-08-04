@@ -88,6 +88,7 @@ in {
     ]
     ++ (import ./pkgs.nix pkgs).tools;
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+  programs.adb.enable = true;
 
   virtualisation.docker.enable = false;
   virtualisation.podman = {
@@ -205,7 +206,7 @@ in {
   users.users.emil = {
     isNormalUser = true;
     description = "Emil Blennow";
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "adbusers"];
     shell = pkgs.zsh;
     # packages = with pkgs; [ ];
   };
