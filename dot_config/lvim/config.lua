@@ -198,7 +198,8 @@ lvim.plugins = {
   {
     'nmac427/guess-indent.nvim',
     config = function() require('guess-indent').setup {} end,
-  }
+  },
+  'Exafunction/codeium.vim'
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>

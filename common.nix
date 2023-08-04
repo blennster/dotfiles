@@ -23,6 +23,10 @@
         bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh) -- \
         --no-install-dependencies
       '')
+      (writeShellScriptBin "patch-codeium" ''
+        nix-shell -p patchelf --command 'patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
+        "$(fd language_server_linux_x64 ~/.local/share/.codeium)"'
+      '')
 
       grml-zsh-config
       zsh-fast-syntax-highlighting
