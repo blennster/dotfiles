@@ -59,6 +59,7 @@ in {
       adw-gtk3
       gnome.dconf-editor
       pavucontrol
+      gnome-mpv
       # pinentry-gnome # use ssh signing instead
 
       # docker-compose
