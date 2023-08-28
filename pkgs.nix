@@ -7,6 +7,7 @@
     btop
     ripgrep
     neovim
+    sqlite
   ];
   prog = with pkgs; [
     cargo
@@ -16,6 +17,7 @@
     nodejs
     rustc
     libstdcxx5
+    zig
   ];
   nvim = with pkgs; [
     python310
@@ -28,17 +30,21 @@
 
     # Lsps and the like
     alejandra
+    clang-tools
+    clippy
     gopls
     lua-language-server
     nil
     nodePackages.bash-language-server
     nodePackages.prettier
+    nodePackages.typescript-language-server
     nodePackages.vscode-json-languageserver
     nodePackages.yaml-language-server
-    nodePackages.typescript-language-server
-    yamlfmt
     rust-analyzer
+    rustfmt
     shellcheck
     shfmt
+    yamlfmt
+    zls
   ];
 }

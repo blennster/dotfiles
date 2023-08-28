@@ -61,7 +61,7 @@ lvim.lsp.installer.setup.automatic_installation = false
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "lua_ls" })
 
 -- Setup lsps without any special config, seems to be needed with system lsps?
-local system_lsps = { "lua_ls", "nil_ls", "gopls", "yamlls", "bashls", "rust-analyzer", "jsonls" }
+local system_lsps = { "lua_ls", "nil_ls", "gopls", "yamlls", "bashls", "rust-analyzer", "jsonls", "zls", "clangd" }
 for _, lsp in ipairs(system_lsps) do
   require("lvim.lsp.manager").setup(lsp, {})
 end

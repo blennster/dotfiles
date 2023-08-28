@@ -24,8 +24,7 @@
         --no-install-dependencies
       '')
       (writeShellScriptBin "patch-codeium" ''
-        nix-shell -p patchelf --command 'patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-        "$(fd language_server_linux_x64 ~/.local/share/.codeium)"'
+        nix-shell -p patchelf --command 'fd language_server_linux_x64 ~/.local/share/.codeium -x patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)"'
       '')
 
       grml-zsh-config
