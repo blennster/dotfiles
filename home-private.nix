@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   home.username = "emil";
   home.homeDirectory = "/home/emil";
   programs.git = {
@@ -18,6 +22,9 @@
   };
   services.syncthing.enable = true;
   services.nextcloud-client.enable = true;
+  home.packages = with pkgs; [
+    pcsx2
+  ];
 
   dconf.settings = with lib.hm.gvariant; {
     "org/gnome/shell" = {
