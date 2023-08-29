@@ -9,42 +9,61 @@
     neovim
     sqlite
   ];
-  prog = with pkgs; [
-    cargo
-    gcc
-    gnumake
-    go
-    nodejs
-    rustc
-    libstdcxx5
-    zig
+  java = with pkgs; [
+    jdk
+    maven
+    gradle
+    jdt-language-server
   ];
-  nvim = with pkgs; [
+  nodejs = with pkgs; [
+    nodejs
+    nodePackages.prettier
+    nodePackages.typescript-language-server
+  ];
+  rust = with pkgs; [
+    cargo
+    clippy
+    rust-analyzer
+    rustc
+    rustfmt
+  ];
+  python = with pkgs; [
     python310
     python310Packages.pynvim
     # python310Packages.flake8
     # python310Packages.autopep8
     # nodePackages.pyright
-
-    nodePackages.neovim
-
-    # Lsps and the like
-    alejandra
+  ];
+  c = with pkgs; [
+    gcc
+    gnumake
+    libstdcxx5
+    # clang
     clang-tools
-    clippy
-    gopls
-    lua-language-server
-    nil
+  ];
+  shell = with pkgs; [
     nodePackages.bash-language-server
-    nodePackages.prettier
-    nodePackages.typescript-language-server
-    nodePackages.vscode-json-languageserver
-    nodePackages.yaml-language-server
-    rust-analyzer
-    rustfmt
     shellcheck
     shfmt
+  ];
+  go = with pkgs; [go gopls];
+  zig = with pkgs; [zig zls];
+  nix = with pkgs; [alejandra nil];
+  prog = with pkgs;
+    []
+    ++ java
+    ++ rust
+    ++ python
+    ++ c
+    ++ shell
+    ++ zig
+    ++ nodejs;
+  nvim = with pkgs; [
+    nodePackages.neovim
+    # Lsps and the like
+    lua-language-server
+    nodePackages.vscode-json-languageserver
+    nodePackages.yaml-language-server
     yamlfmt
-    zls
   ];
 }
