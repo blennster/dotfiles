@@ -1,21 +1,11 @@
-{pkgs, ...}: {
-  # These will also be part of system configuration
-  tools = with pkgs; [
-    jq
-    fd
-    htop
-    btop
-    ripgrep
-    neovim
-    sqlite
-  ];
+{pkgs, ...}: let
   java = with pkgs; [
     jdk
     maven
     gradle
     jdt-language-server
   ];
-  nodejs = with pkgs; [
+  node_js = with pkgs; [
     nodejs
     nodePackages.prettier
     nodePackages.typescript-language-server
@@ -46,18 +36,31 @@
     shellcheck
     shfmt
   ];
-  go = with pkgs; [go gopls];
-  zig = with pkgs; [zig zls];
+  golang = with pkgs; [go gopls];
+  ziglang = with pkgs; [zig zls];
   nix = with pkgs; [alejandra nil];
+in {
+  # These will also be part of system configuration
+  tools = with pkgs; [
+    jq
+    fd
+    htop
+    btop
+    ripgrep
+    neovim
+    sqlite
+  ];
   prog = with pkgs;
     []
-    ++ java
-    ++ rust
-    ++ python
     ++ c
+    ++ golang
+    ++ java
+    ++ nix
+    ++ node_js
+    ++ python
+    ++ rust
     ++ shell
-    ++ zig
-    ++ nodejs;
+    ++ ziglang;
   nvim = with pkgs; [
     nodePackages.neovim
     # Lsps and the like
