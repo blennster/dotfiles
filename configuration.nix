@@ -20,6 +20,8 @@ in {
   nix.settings.experimental-features = ["nix-command" "flakes"];
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-23.05";
 
+  services.lvm.boot.thin.enable = true; # when using thin provisioning or caching
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -27,6 +29,7 @@ in {
     file
     git
     wget
+    bintools
 
     firefox
 
