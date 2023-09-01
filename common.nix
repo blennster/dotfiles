@@ -16,6 +16,7 @@
         flatpak install -y flathub com.discordapp.Discord
         flatpak install -y flathub com.spotify.Client
         flatpak install -y flathub com.github.tchx84.Flatseal
+        flatpak install -y flathub us.zoom.Zoom
       '')
       (writeShellScriptBin "install-lvim" ''
         echo "Make sure to not install extensions, they are managed in hm"

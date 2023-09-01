@@ -69,7 +69,6 @@ in {
       podman-compose
 
       # Desktop
-      xdg-desktop-portal-gtk
       vlc
       ffmpegthumbnailer
       easyeffects
