@@ -20,9 +20,9 @@
   python = with pkgs; [
     python310
     python310Packages.pynvim
-    # python310Packages.flake8
-    # python310Packages.autopep8
-    # nodePackages.pyright
+    python310Packages.flake8
+    python310Packages.autopep8
+    nodePackages.pyright
   ];
   c = with pkgs; [
     gcc
@@ -51,7 +51,7 @@ in {
     sqlite
   ];
   prog = with pkgs;
-    []
+    [efm-langserver]
     ++ c
     ++ golang
     ++ java
