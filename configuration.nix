@@ -142,8 +142,32 @@ in {
   # services.xserver.displayManager.defaultSession = "plasmawayland";
   # services.xserver.desktopManager.plasma5.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver = {
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+    ];
+    wlr = {
+      enable = true;
+      # settings = {
+      #   # uninteresting for this problem, for completeness only
+      #   screencast = {
+      #     output_name = "eDP-1";
+      #     max_fps = 30;
+      #     chooser_type = "simple";
+      #     chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+      #   };
+      # };
+    };
+  };
+
+  programs.sway.enable = true;
+
   programs.dconf.enable = true;
 
   environment.gnome.excludePackages =
@@ -164,8 +188,6 @@ in {
       atomix # puzzle game
     ]);
 
-  xdg.portal.enable = true;
-
   # Configure keymap in X11
   services.xserver = {
     layout = "se";
@@ -182,6 +204,9 @@ in {
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.pam.services = {
+    swaylock = {};
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;

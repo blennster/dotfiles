@@ -30,6 +30,14 @@
 
       grml-zsh-config
       zsh-fast-syntax-highlighting
+      sway
+      swayidle
+      swaylock
+      wofi
+      brightnessctl
+      wob
+      networkmanagerapplet
+      waybar
     ]
     ++ (import ./pkgs.nix pkgs).tools
     ++ (import ./pkgs.nix pkgs).prog
@@ -50,6 +58,16 @@
       # executable = true; # This does not work, set executable in git instead
       recursive = true;
       source = ./bin;
+    };
+  };
+
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.gnome.adwaita-icon-theme;
+    size = 24;
+    x11 = {
+      enable = true;
+      defaultCursor = "Adwaita";
     };
   };
 
