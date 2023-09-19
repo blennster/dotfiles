@@ -167,7 +167,31 @@ in {
     };
   };
 
-  programs.sway.enable = true;
+  dbus-sway-environment = pkgs.writeTextFile {
+    name = "dbus-sway-environment";
+    destination = "/bin/dbus-sway-environment";
+    executable = true;
+
+    text = ''
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+    '';
+  };
+
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    extraPackages = with pkgs; [
+      swaylock
+      swayidle
+      wofi
+      waybar
+    ];
+  };
+  security.pam.services = {
+    swaylock = {};
+  };
 
   programs.dconf.enable = true;
 
@@ -205,9 +229,6 @@ in {
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  security.pam.services = {
-    swaylock = {};
-  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;

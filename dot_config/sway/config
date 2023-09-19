@@ -1,10 +1,11 @@
-# exec systemctl --user import-environment
-# exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
 # announce a running sway session to systemd
+# exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
 exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-
+exec systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+exec systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
 
 ### Variables
 #
@@ -38,7 +39,7 @@ output eDP-1 {
 }
 
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+exec_always rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
 bindsym XF86AudioRaiseVolume exec \
     pactl set-sink-volume @DEFAULT_SINK@ +5% && \
@@ -59,6 +60,9 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 bindsym XF86Search exec $menu --show drun
+
+bindsym $mod+c exec grim -g "$(slurp)"
+bindsym Print exec grim -g "$(slurp)"
  
 ### Output configuration
 #
@@ -245,7 +249,9 @@ bindsym $mod+r mode "resize"
 bar {
     swaybar_command waybar
 }
-exec_always nm-applet --indicato
+
+exec_always nm-applet --indicator
+
 exec swayidle -w \
     timeout 300 'swaylock -f' \
     timeout 600 'swaymsg "output * dpms off"' \

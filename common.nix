@@ -33,12 +33,14 @@
 
       grml-zsh-config
       zsh-fast-syntax-highlighting
-      wofi
       brightnessctl
       playerctl
       wob
+      bluetuith
+      wayshot
+      slurp
+      imv
       networkmanagerapplet
-      waybar
     ]
     ++ (import ./pkgs.nix pkgs).tools
     ++ (import ./pkgs.nix pkgs).prog
