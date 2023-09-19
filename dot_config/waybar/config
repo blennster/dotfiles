@@ -2,12 +2,13 @@
 // vim: set ft=jsonc:
 
 {
-	"layer": "top",
+	"layer": "bottom",
 	"position": "bottom",
 
 	"modules-left": [
 		"sway/workspaces",
-		"custom/right-arrow-dark"
+		"custom/right-arrow-dark",
+		"idle_inhibitor"
 	],
 	"modules-center": [
 		"custom/left-arrow-dark",
@@ -60,6 +61,10 @@
 	"sway/workspaces": {
 		"disable-scroll": true,
 		"format": "{name}"
+	},
+
+	"idle_inhibitor": {
+		"timeout": 60
 	},
 
 	"clock#1": {
