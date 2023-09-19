@@ -27,14 +27,15 @@
       (writeShellScriptBin "patch-codeium" ''
         nix-shell -p patchelf --command 'fd language_server_linux_x64 ~/.local/share/.codeium -x patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)"'
       '')
+      (writeShellScriptBin "install-sway" ''
+        sudo pacman -S sway waybar swayidle swaylock wofi wob playerctl brightnessctl
+      '')
 
       grml-zsh-config
       zsh-fast-syntax-highlighting
-      sway
-      swayidle
-      swaylock
       wofi
       brightnessctl
+      playerctl
       wob
       networkmanagerapplet
       waybar

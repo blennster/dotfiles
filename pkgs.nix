@@ -49,6 +49,9 @@ in {
     ripgrep
     neovim
     sqlite
+    openssl
+    unzip
+    ranger
   ];
   prog = with pkgs;
     [efm-langserver]
