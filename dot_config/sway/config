@@ -247,6 +247,7 @@ bar {
 }
 
 include @sysconfdir@/sway/config.d/*
+include ~/.config/sway/config.d/*
 
 exec_always nm-applet --indicator
 
