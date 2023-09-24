@@ -39,6 +39,7 @@
       bluetuith
       wayshot
       slurp
+      grim
       imv
       networkmanagerapplet
     ]

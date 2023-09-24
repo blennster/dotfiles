@@ -6,10 +6,10 @@
 	"position": "bottom",
 
 	"modules-left": [
+		"sway/mode",
 		"sway/workspaces",
 		"custom/right-arrow-dark",
-		"idle_inhibitor",
-		"sway/mode"
+		"idle_inhibitor"
 	],
 	"modules-center": [
 		"custom/left-arrow-dark",
@@ -20,7 +20,8 @@
 		"custom/right-arrow-dark",
 		"custom/right-arrow-light",
 		"clock#3",
-		"custom/right-arrow-dark"
+		"custom/right-arrow-dark",
+		"clock/calendar"
 	],
 	"modules-right": [
 		"custom/left-arrow-dark",
@@ -70,7 +71,7 @@
 
 	"clock#1": {
 		"format": "{:%Y-%m-%d}",
-		"tooltip": false
+		"tooltip-format": "<tt><small>{calendar}</small></tt>"
 	},
 	"clock#2": {
 		"format": "{:%H:%M}",
