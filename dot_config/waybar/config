@@ -40,16 +40,19 @@
 		}
 	},
 	"mpris": {
-		"format": "{player}: <i>{artist} - {title}</i> {player_icon}",
-		"format-paused": "{player}: <i>{artist} - {title}</i> {status_icon}",
+		"format": "{player_icon} <i>{artist} - {title}</i> {status_icon}",
 		"player-icons": {
-			"default": " ",
-			"mpv": "🎵"
+			"default": "unknown:",
+			"mpv": "🎵",
+			"spotify": "󰓇",
+			"vlc": "󰕼",
+			"firefox": "󰈹"
 		},
 		"status-icons": {
-			"paused": " "
-		},
-		"ignored-players": ["firefox"]
+			"paused": " ",
+			"playing": " "
+		}
+		// "ignored-players": ["firefox"]
 	},
 	"clock#1": {
 		"format": "{:%y-%m-%d | %H:%M | %A }",
