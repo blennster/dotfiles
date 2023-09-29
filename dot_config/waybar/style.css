@@ -89,8 +89,8 @@
 }
 
 #battery.warning.discharging {
-    animation-name: blink-warning;
-    animation-duration: 3s;
+    /* animation-name: blink-warning; */
+    /* animation-duration: 3s; */
 }
 
 #battery.critical.discharging {
