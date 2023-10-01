@@ -113,6 +113,7 @@
   };
   programs.kitty = {
     enable = true;
+    package = pkgs.neovim; # "Dummy" package
     font = {
       package = pkgs.nerdfonts.override {fonts = ["IosevkaTerm"];};
       name = "IosevkaTerm NFM";
