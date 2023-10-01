@@ -33,7 +33,7 @@
 
 	"idle_inhibitor": {
 		"timeout": 60,
-		"format": "{icon}  ",
+		"format": " {icon}  ",
 		"format-icons": {
 			"activated": "",
 			"deactivated": ""

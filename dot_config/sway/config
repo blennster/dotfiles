@@ -1,10 +1,10 @@
 # announce a running sway session to systemd
 # exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
 # exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-
-exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec systemctl --user restart pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-wlr
+#
+# exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+# exec systemctl --user restart pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-wlr
 
 ### Variables
 #
@@ -20,7 +20,7 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi --allow-images --insensitive --matching=contains
+set $menu wofi -G --allow-images --insensitive --matching=contains
 set $screenshot grim -g "$(slurp)"
 
 xwayland enable
@@ -28,6 +28,8 @@ xwayland enable
 # Setup wob for level indicators
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec_always rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+
+exec export MOZ_ENABLE_WAYLAND=1
 
 ### Output configuration
 #
@@ -245,7 +247,8 @@ bar {
     swaybar_command waybar
 }
 
-include @sysconfdir@/sway/config.d/*
+# include @sysconfdir@/sway/config.d/*
+include /etc/sway/config.d/*
 include ~/.config/sway/config.d/*
 
 exec_always nm-applet --indicator
