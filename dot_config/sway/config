@@ -251,5 +251,9 @@ bar {
 # include /etc/sway/config.d/*
 include ~/.config/sway/config.d/*
 
+# Start Network manager
 exec_always nm-applet --indicator
+
+# Load autostart entries
+exec dex -a
 
