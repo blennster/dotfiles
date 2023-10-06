@@ -1,10 +1,10 @@
 # announce a running sway session to systemd
-# exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
-# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-#
-# exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
-# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-# exec systemctl --user restart pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-wlr
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP GTK_THEME
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway GTK_THEME
+
+# Start nesscary services
+exec systemctl --user restart wireplumber xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk
 
 ### Variables
 #
@@ -248,7 +248,7 @@ bar {
 }
 
 # include @sysconfdir@/sway/config.d/*
-include /etc/sway/config.d/*
+# include /etc/sway/config.d/*
 include ~/.config/sway/config.d/*
 
 exec_always nm-applet --indicator
