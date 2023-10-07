@@ -52,6 +52,8 @@ in {
     openssl
     unzip
     ranger
+    d2
+    nmap
   ];
   prog = with pkgs;
     [efm-langserver]
