@@ -96,6 +96,9 @@
             "portable": " ",
 			"default": "󰕾 "
         },
+		"ignored-sinks": [
+			"Easy Effects Sink"
+		],
         "on-click": "pavucontrol"
 	},
 	"network": {
