@@ -26,6 +26,7 @@
   ];
   c = with pkgs; [
     gcc
+    gdb
     gnumake
     libstdcxx5
     # clang

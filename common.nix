@@ -35,13 +35,8 @@
       zsh-fast-syntax-highlighting
       brightnessctl
       playerctl
-      wob
       bluetuith
-      wayshot
-      slurp
-      grim
       imv
-      networkmanagerapplet
     ]
     ++ (import ./pkgs.nix pkgs).tools
     ++ (import ./pkgs.nix pkgs).prog
@@ -135,6 +130,9 @@
       "kitty_mod+down" = "next_window";
       "kitty_mod+left" = "previous_window";
       "kitty_mod+up" = "previous_window";
+    };
+    settings = {
+      enable_audio_bell = false;
     };
     shellIntegration.enableZshIntegration = true;
   };
