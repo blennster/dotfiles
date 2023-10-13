@@ -18,7 +18,7 @@
     rustfmt
   ];
   python = with pkgs; [
-    python310
+    # python310
     python310Packages.pynvim
     python310Packages.flake8
     python310Packages.autopep8
@@ -49,8 +49,6 @@ in {
     btop
     ripgrep
     neovim
-    sqlite
-    openssl
     unzip
     ranger
     d2

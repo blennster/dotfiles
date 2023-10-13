@@ -97,7 +97,8 @@
 			"default": "󰕾 "
         },
 		"ignored-sinks": [
-			"Easy Effects Sink"
+			"Easy Effects Sink",
+			"easyeffects_sink"
 		],
         "on-click": "pavucontrol"
 	},
