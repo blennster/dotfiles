@@ -72,9 +72,9 @@
 
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
+    enableCompletion = false;
     enableAutosuggestions = true;
-    # syntaxHighlighting.enable = true;
+    syntaxHighlighting.enable = false;
     initExtraFirst = ''
       source $HOME/.nix-profile/etc/zsh/zshrc # Load grml
       source $HOME/.nix-profile/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
@@ -89,7 +89,6 @@
   home.shellAliases = {
     lg = "lazygit";
   };
-
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -134,7 +133,7 @@
     settings = {
       enable_audio_bell = false;
     };
-    shellIntegration.enableZshIntegration = true;
+    shellIntegration.enableZshIntegration = false;
   };
   programs.lazygit = {
     enable = true;
