@@ -79,7 +79,7 @@
       source $HOME/.nix-profile/etc/zsh/zshrc # Load grml
       source $HOME/.nix-profile/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
       prompt off
-      bindkey -v # Vim keybindings
+      # bindkey -v # Vim keybindings
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
     '';
   };
