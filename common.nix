@@ -81,6 +81,8 @@
       prompt off
       # bindkey -v # Vim keybindings
       ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+      export MANPAGER="less -R --use-color -Dd+r -Du+b"
+      export MANROFFOPT="-P -c"
     '';
   };
   programs.starship = {
