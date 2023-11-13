@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+if [[ ! -e /sys/bus/platform/drivers/ideapad_acpi ]]; then
+  echo "No acpi driver for ideapad found"
+  exit 1
+fi
+
+if [[ -n $1 && ($1 -eq 0 || $1 -eq 1) ]]; then
+  echo "$1" | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
+else
+  echo "Usage: $(basename "$0") on|off"
+  printf "Current: "
+  cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode
+fi

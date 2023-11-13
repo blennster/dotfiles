@@ -1,0 +1,159 @@
+// -*- mode: json -*-
+// vim: set ft=jsonc:
+
+{
+	"layer": "bottom",
+	"position": "bottom",
+	"height": 30,
+
+	"modules-left": [
+		"sway/mode",
+		"sway/workspaces",
+		"custom/right-arrow-dark",
+		"idle_inhibitor",
+		"mpris"
+	],
+	"modules-center": [
+		"clock#1"
+	],
+	"modules-right": [
+		"pulseaudio",
+		"network",
+		"memory",
+		"cpu",
+		"temperature",
+		"battery",
+		"tray"
+	],
+
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"format": "{name}"
+	},
+
+	"idle_inhibitor": {
+		"timeout": 60,
+		"format": " {icon}  ",
+		"format-icons": {
+			"activated": "",
+			"deactivated": ""
+		}
+	},
+	"mpris": {
+		"format": "{player_icon} <i>{artist} - {title}</i> {status_icon}",
+		"player-icons": {
+			"default": "unknown:",
+			"mpv": "🎵",
+			"spotify": "󰓇",
+			"vlc": "󰕼",
+			"firefox": "󰈹"
+		},
+		"status-icons": {
+			"paused": " ",
+			"playing": " "
+		}
+		// "ignored-players": ["firefox"]
+	},
+	"clock#1": {
+		"format": "{:%y-%m-%d | %H:%M | %A }",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode"          : "year",
+			"mode-mon-col"  : 3,
+			"weeks-pos"     : "right",
+			"on-scroll"     : 1,
+			"on-click-right": "mode",
+			"format": {
+				"months":     "<span color='#ffead3'><b>{}</b></span>",
+				"days":       "<span color='#ecc6d9'><b>{}</b></span>",
+				"weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+				"weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+				"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+			}
+		},
+		"actions":  {
+			"on-click-right": "mode",
+			"on-click-forward": "tz_up",
+			"on-click-backward": "tz_down",
+			"on-scroll-up": "shift_up",
+			"on-scroll-down": "shift_down"
+		}
+	},
+
+	"pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} | {format_source}",
+        "format-bluetooth": "{volume}% {icon} | {format_source}",
+        "format-bluetooth-muted": "󰝟  {icon} | {format_source}",
+        "format-muted": "󰝟  | {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "󰋋 ",
+            "handsfree": "󰋋 ",
+            "headset": "󰋋 ",
+            "phone": " ",
+            "portable": " ",
+			"default": "󰕾 "
+        },
+		"ignored-sinks": [
+			"Easy Effects Sink",
+			"easyeffects_sink"
+		],
+        "on-click": "pavucontrol"
+	},
+	"network": {
+        "interval": 5,
+        "format-wifi": "   {essid} ({signalStrength}%)", // Icon: wifi
+        "format-ethernet": "󰈁  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+        "format-disconnected": "󰈂  Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}"
+    },
+	"memory": {
+        "interval": 5,
+        "format": "󰍛  {}%", // Icon: memory
+        "states": {
+            "warning": 80,
+            "critical": 90
+        }
+    },
+	"cpu": {
+		"interval": 5,
+		"format": "  {usage}% ({load})" // Icon: microchip
+	},
+	"temperature": {
+		"critical-threshold": 85,
+		"interval": 5,
+		"format": "{icon}  {temperatureC}°C",
+		"format-icons": [
+			"", // Icon: temperature-empty
+			"", // Icon: temperature-quarter
+			"", // Icon: temperature-half
+			"", // Icon: temperature-three-quarters
+			""  // Icon: temperature-full
+		],
+		"tooltip": true
+	},
+	"battery": {
+        "interval": 10,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        // Connected to AC
+        "format": " {icon}   {capacity}%", // Icon: bolt
+        // Not connected to AC
+        "format-discharging": "{icon}   {capacity}%",
+        "format-icons": [
+            "", // Icon: battery-full
+            "", // Icon: battery-three-quarters
+            "", // Icon: battery-half
+            "", // Icon: battery-quarter
+            ""  // Icon: battery-empty
+        ],
+        "tooltip": true
+    },
+	"tray": {
+		"icon-size": 20
+	}
+}

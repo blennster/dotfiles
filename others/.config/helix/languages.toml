@@ -1,0 +1,9 @@
+# [[language]]
+# name = "rust"
+
+# [language.config.checkOnSave]
+# command = "clippy"
+
+[[language]]
+name = "c"
+config = { "clangd.fallbackFlags" = [ "-std=gnu18" ] }
