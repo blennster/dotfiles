@@ -10,8 +10,16 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Fzf
 if [[ -x $(which fzf) ]] ; then
-	source /usr/share/fzf/key-bindings.zsh
-	source /usr/share/fzf/completion.zsh
+	# Arch
+	if [[ -d "/usr/share/fzf" ]] ; then
+		source /usr/share/fzf/key-bindings.zsh
+		source /usr/share/fzf/completion.zsh
+	fi
+	# Ubuntu
+	elif [[ -d "/usr/share/doc/fzf/examples" ]] ; then
+		source /usr/share/doc/fzf/examples/key-bindings.zsh
+		source /usr/share/doc/fzf/examples/completion.zsh
+	fi
 fi
 
 # Prompt
