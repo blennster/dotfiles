@@ -1,3 +1,9 @@
+# First source user binaries
+LOCAL_BIN="$HOME/.local/bin"
+if [[ -d "$LOCAL_BIN" ]] ; then
+	export PATH="$LOCAL_BIN:$PATH"
+fi
+
 # Shell bindings and prompt
 source $HOME/.config/zsh/grml.zsh
 
@@ -14,7 +20,6 @@ if [[ -x $(which fzf) ]] ; then
 	if [[ -d "/usr/share/fzf" ]] ; then
 		source /usr/share/fzf/key-bindings.zsh
 		source /usr/share/fzf/completion.zsh
-	fi
 	# Ubuntu
 	elif [[ -d "/usr/share/doc/fzf/examples" ]] ; then
 		source /usr/share/doc/fzf/examples/key-bindings.zsh
@@ -56,11 +61,6 @@ export MANROFFOPT="-P -c"
 CARGO_ENV="$HOME/.cargo/env"
 if [[ -e "$CARGO_ENV" ]] ; then
   source "$CARGO_ENV"
-fi
-
-LOCAL_BIN="$HOME/.local/bin"
-if [[ -d "$LOCAL_BIN" ]] ; then
-	export PATH="$LOCAL_BIN:$PATH"
 fi
 
 export GOPATH="$HOME/go"
