@@ -255,5 +255,5 @@ include ~/.config/sway/config.d/*
 exec_always nm-applet --indicator
 
 # Load autostart entries
-exec dex -a
+exec dex -a -s ~/.config/autostart
 
