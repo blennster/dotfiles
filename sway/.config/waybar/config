@@ -92,16 +92,18 @@
 		},
 		"ignored-sinks": [
 			"Easy Effects Sink",
-			"easyeffects_sink"
+			"easyeffects_sink",
+			"PulseEffects(apps)",
+			"PulseEffects_apps"
 		],
 		"on-click": "pavucontrol"
 	},
 	"network": {
 		"interval": 5,
 		"format-wifi": "   {essid} ({signalStrength}%)", // Icon: wifi
-		"format-ethernet": "󰈁  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+		"format-ethernet": "󰈁  {ipaddr}/{cidr}", // Icon: ethernet
 		"format-disconnected": "󰈂  Disconnected",
-		"tooltip-format": "{ifname}: {ipaddr}"
+		"tooltip-format": "{ifname}: {ipaddr}/{cidr}"
 	},
 	"memory": {
 		"interval": 5,
