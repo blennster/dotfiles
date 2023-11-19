@@ -1,0 +1,4 @@
+[user]
+	name = "Emil Blennow"
+	email = "emil.blennow@sony.com"
+	signingkey = "~/.ssh/id_ed25519"

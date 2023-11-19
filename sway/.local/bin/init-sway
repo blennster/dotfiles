@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
 
 if grep -q "Arch Linux" /etc/os-release; then
-  sudo pacman -Syu sway waybar swayidle swaylock wofi wob playerctl brightnessctl grim slurp dex
+  sudo pacman -Syu sway waybar swayidle swaylock wofi wob playerctl brightnessctl grim slurp dex network-manager-applet
 fi

@@ -7,7 +7,5 @@
 [init]
 	defaultBranch = "main"
 
-[user]
-	email = "emil.blennow99@gmail.com"
-	name = "Emil Blennow"
-	signingkey = "~/.ssh/id_ed25519"
+[include]
+    path = user_info
