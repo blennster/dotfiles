@@ -55,7 +55,9 @@ setopt SHARE_HISTORY
 
 # Colored manpages
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
-export MANROFFOPT="-P -c"
+if grep -q "Arch Linux" /etc/os-release ; then
+	export MANROFFOPT="-P -c"
+fi
 
 # Environment
 CARGO_ENV="$HOME/.cargo/env"
