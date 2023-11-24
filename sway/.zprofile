@@ -1,0 +1,16 @@
+start_sway ()
+{
+    export MOZ_ENABLE_WAYLAND=1
+    export VDPAU_DRIVER=radeonsi
+
+    export XDG_CURRENT_DESKTOP=sway
+    export GTK_THEME=adw-gtk3-dark
+    exec sway
+}
+
+if [ "$USER" = "emil" ] && grep -q "Arch Linux" /etc/os-release; then
+    # If running from tty1 start sway
+    if [ "$(tty)" = "/dev/tty1" ]; then
+        start_sway
+    fi
+fi
