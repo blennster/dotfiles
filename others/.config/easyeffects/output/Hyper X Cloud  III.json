@@ -1,0 +1,16 @@
+{
+    "output": {
+        "blocklist": [],
+        "convolver#0": {
+            "autogain": false,
+            "bypass": false,
+            "input-gain": 0.0,
+            "ir-width": 100,
+            "kernel-path": "/home/emil/.config/easyeffects/irs/HyperX Cloud III Wireless minimum phase 48000 Hz.irs",
+            "output-gain": -4.6
+        },
+        "plugins_order": [
+            "convolver#0"
+        ]
+    }
+}
