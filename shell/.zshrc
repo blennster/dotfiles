@@ -54,8 +54,8 @@ unsetopt HIST_EXPIRE_DUPS_FIRST
 setopt SHARE_HISTORY
 
 # Colored manpages
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
 if grep -q "Arch Linux" /etc/os-release ; then
+	export MANPAGER="less -R --use-color -Dd+r -Du+b"
 	export MANROFFOPT="-P -c"
 fi
 
