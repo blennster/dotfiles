@@ -16,6 +16,12 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Fzf
 if [[ -x $(which fzf) ]] ; then
+	if [[ -x $(which fd) ]] ; then
+		export FZF_DEFAULT_COMMAND='fd --strip-cwd-prefix'
+		export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+		export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+	fi
+
 	# Arch
 	if [[ -d "/usr/share/fzf" ]] ; then
 		source /usr/share/fzf/key-bindings.zsh
