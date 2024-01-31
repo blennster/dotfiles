@@ -1,0 +1,16 @@
+{
+    "output": {
+        "blocklist": [],
+        "convolver#0": {
+            "autogain": true,
+            "bypass": false,
+            "input-gain": 0.0,
+            "ir-width": 100,
+            "kernel-path": "/home/emil/.config/easyeffects/irs/Sony WH-1000XM5 minimum phase 48000 Hz.irs",
+            "output-gain": 0.1
+        },
+        "plugins_order": [
+            "convolver#0"
+        ]
+    }
+}
