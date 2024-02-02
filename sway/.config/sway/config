@@ -21,6 +21,7 @@ set $term foot
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu wofi -G --allow-images --insensitive --matching=contains
+
 set $screenshot grim -g "$(slurp)" - | wl-copy
 
 xwayland enable
@@ -32,6 +33,9 @@ exec_always rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 exec export MOZ_ENABLE_WAYLAND=1
 
 ### Output configuration
+
+output * bg #323232 solid_color
+
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
 # output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
@@ -202,7 +206,7 @@ input type:touchpad {
     bindsym XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
     bindsym XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
 
-    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym --locked XF86AudioPlay exec playerctl play-pause
     bindsym XF86AudioPause exec playerctl pause
     bindsym XF86AudioNext exec playerctl next
     bindsym XF86AudioPrev exec playerctl previous
