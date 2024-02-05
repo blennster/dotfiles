@@ -1,0 +1,37 @@
+* {
+    font-family: monospace;
+}
+
+window {
+    /* background-color: #7C818C; */
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#input {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+#outer-box {
+    padding: 5px;
+}
+
+#entry {
+    border-radius: 5px;
+    margin: 1px 0;
+}
+
+#entry:selected {
+    background-color: #37474F;
+}
+
+#text {
+    color: gray;
+    margin-left: 5px;
+}
+
+#text:selected {
+    color: white;
+}
