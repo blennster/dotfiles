@@ -41,6 +41,10 @@ if [[ $TERM != "dumb" ]]; then
   fi
 fi
 
+if [[ -x $(which podman) ]]; then
+	eval $(podman completion zsh)
+fi
+
 # History
 HISTSIZE="10000"
 SAVEHIST="10000"
