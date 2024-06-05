@@ -51,12 +51,14 @@ output * bg #323232 solid_color
 
 ### Idle configuration
 
+set $lockcmd swaylock -f
 # use power instead of dpms when all versions are above 1.6
 exec swayidle -w \
-    timeout 300 'swaylock -f' \
+    timeout 300 '$lockcmd' \
     timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock -f' \
-    lock 'swaylock -f'
+    timeout 1800 'systemctl suspend' \
+    before-sleep '$lockcmd' \
+    lock '$lockcmd'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -104,6 +106,10 @@ input type:touchpad {
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # You may also use this for output selection
+    # swaymsg -t get_outputs | jq -r '.[] | select(.focused==true).name'
+    bindsym $mod+m exec wl-mirror "$(slurp -f %o)"
 #
 # Moving around:
 #
