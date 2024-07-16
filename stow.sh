@@ -5,16 +5,15 @@ set -eu
 modules=(shell others scripts sway)
 
 case $USER in
-    "s7000033439")
-        stow -v work
-        ln -f -s ~/.config/tmux/tmux.conf ~/.tmux.conf
+    "now")
+        modules=(work shell)
         ;;
     *)
-        stow -v home
+        modules=(home "${modules[@]}")
         ;;
 esac
 
 for module in "${modules[@]}"; do
-    stow -v "$module"
+    stow --dotfiles -v "$module"
 done
 

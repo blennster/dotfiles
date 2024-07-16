@@ -1,7 +1,7 @@
 [submodule "fast-syntax-highlighting"]
-    path = shell/.config/zsh/fast-syntax-highlighting
+    path = shell/dot-config/zsh/fast-syntax-highlighting
     url = https://github.com/zdharma-continuum/fast-syntax-highlighting
 
 [submodule "zsh-autosuggestions"]
-	path = shell/.config/zsh/zsh-autosuggestions
+	path = shell/dot-config/zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions

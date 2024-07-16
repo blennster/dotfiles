@@ -1,0 +1,72 @@
+[env]
+TERM = "xterm-256color"
+LANG = "en_US.UTF-8"
+
+[window]
+opacity = 1
+blur = false
+option_as_alt = "OnlyLeft"
+dynamic_padding = true
+
+[font]
+normal = { family = "IosevkaTerm Nerd Font", style = "Regular" }
+size = 14
+
+[[hints.enabled]]
+command = "open"
+hyperlinks = true
+post_processing = true
+persist = false
+binding = { key = "O", mods = "Control|Shift" }
+mouse = { enabled = true, mods = "Command" }
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+
+# # Tokyo night storm
+# [colors.primary]
+# background = "#24283b"
+# foreground = "#a9b1d6"
+#
+# [colors.normal]
+# black = "#32344a"
+# red = "#f7768e"
+# green = "#9ece6a"
+# yellow = "#e0af68"
+# blue = "#7aa2f7"
+# magenta = "#ad8ee6"
+# cyan = "#449dab"
+# white = "#9699a8"
+#
+# [colors.bright]
+# black = "#444b6a"
+# red = "#ff7a93"
+# green = "#b9f27c"
+# yellow = "#ff9e64"
+# blue = "#7da6ff"
+# magenta = "#bb9af7"
+# cyan = "#0db9d7"
+# white = "#acb0d0"
+
+# # iTerm 2 default theme
+# [colors.primary]
+# background = '#101421'
+# foreground = '#fbfbf6'
+#
+# [colors.normal]
+# black = '#2e2e2e'
+# red = '#eb4129'
+# green = '#abe047'
+# yellow = '#f6c744'
+# blue = '#47a0f3'
+# magenta = '#7b5cb0'
+# cyan = '#64dbed'
+# white = '#e5e9f0'
+#
+# [colors.bright]
+# black = '#565656'
+# red = '#ec5357'
+# green = '#c0e17d'
+# yellow = '#f9da6a'
+# blue = '#49a4f8'
+# magenta = '#a47de9'
+# cyan = '#99faf2'
+# white = '#ffffff'

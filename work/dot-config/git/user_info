@@ -1,4 +1,4 @@
 [user]
 	name = "Emil Blennow"
-	email = "emil.blennow@sony.com"
+	email = "emil.blennow@svep.se"
 	signingkey = "~/.ssh/id_ed25519"

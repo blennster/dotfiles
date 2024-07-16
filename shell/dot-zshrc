@@ -1,3 +1,4 @@
+# vim: set ft=zsh:
 # First source user binaries
 LOCAL_BIN="$HOME/.local/bin"
 if [[ -d "$LOCAL_BIN" ]] ; then
@@ -30,6 +31,10 @@ if [[ -x $(which fzf) ]] ; then
 	elif [[ -d "/usr/share/doc/fzf/examples" ]] ; then
 		source /usr/share/doc/fzf/examples/key-bindings.zsh
 		source /usr/share/doc/fzf/examples/completion.zsh
+	# MacOS
+	elif [[ -d "/opt/homebrew/opt/fzf/shell" ]] ; then
+		source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+		source /opt/homebrew/opt/fzf/shell/completion.zsh
 	fi
 fi
 
@@ -64,7 +69,7 @@ unsetopt HIST_EXPIRE_DUPS_FIRST
 setopt SHARE_HISTORY
 
 # Colored manpages
-if grep -q "Arch Linux" /etc/os-release ; then
+if grep -q "Arch Linux" /etc/os-release 2> /dev/null ; then
 	export MANPAGER="less -R --use-color -Dd+r -Du+b"
 	export MANROFFOPT="-P -c"
 fi
@@ -86,3 +91,14 @@ export BROWSER=firefox
 # Aliases
 alias lg='lazygit'
 
+# Mac specifics
+if [[ $(uname) = "Darwin" ]] ; then
+	unset BROWSER
+
+	pypath="$HOME/Library/Python/3.9/bin"
+	if [[ -d "$pypath" ]] ; then
+		export PATH="$pypath:$PATH"
+	fi
+
+	export HOMEBREW_NO_AUTO_UPDATE
+fi
