@@ -2,14 +2,14 @@
 
 set -eu
 
-modules=(shell others scripts sway)
+modules=(shell scripts)
 
 case $USER in
 "now")
-    modules=(work shell)
+    modules=(work "${modules[@]}" macos)
     ;;
 *)
-    modules=(home "${modules[@]}")
+    modules=(home "${modules[@]}" others sway)
     ;;
 esac
 
