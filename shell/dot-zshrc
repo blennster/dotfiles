@@ -7,6 +7,8 @@ fi
 
 # Shell bindings and prompt
 source $HOME/.config/zsh/grml.zsh
+prompt off
+source $HOME/.config/zsh/prompt.zsh
 
 # Highlighting
 source $HOME/.config/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -38,12 +40,6 @@ if [[ -x $(which fzf) ]] ; then
 	fi
 fi
 
-# Prompt
-if [[ $TERM != "dumb" ]]; then
-  if [[ -x $(which starship) ]]; then
-    prompt off
-    eval "$(starship init zsh)"
-  fi
 fi
 
 if [[ -x $(which podman) ]]; then
@@ -101,4 +97,6 @@ if [[ $(uname) = "Darwin" ]] ; then
 	fi
 
 	export HOMEBREW_NO_AUTO_UPDATE
+	export XDG_CONFIG_HOME="$HOME/.config"
 fi
+
