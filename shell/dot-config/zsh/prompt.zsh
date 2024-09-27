@@ -10,13 +10,13 @@ function precmd {
     PR_FILLBAR=""
     PR_PWDLEN=""
 
-    local promptsize=${#${(%):-(%n@%m )}}
+    local promptsize=${#${(%):-(%n@%m)}}
     local pwdsize=${#${(%):-%~}}
 
     if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
         ((PR_PWDLEN=$TERMWIDTH - $promptsize))
     else
-    PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
+        # PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
     fi
 
 
@@ -83,7 +83,7 @@ setprompt () {
     PROMPT='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
 $PR_GREEN%(!.%SROOT%s.%n)$PR_GREEN@%m \
 %F{39}%$PR_PWDLEN<...<%~%<< \
-$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_HBAR${(e)PR_FILLBAR}
+$PR_CYAN$PR_SHIFT_IN${(e)PR_FILLBAR}
 \
 %(1j.%F{blue}• .)%(?.$PR_WHITE.$PR_LIGHT_RED)❯\
 $PR_NO_COLOUR '

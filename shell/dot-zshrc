@@ -7,6 +7,10 @@ fi
 
 # Shell bindings and prompt
 source $HOME/.config/zsh/grml.zsh
+zstyle ':prompt:grml:left:setup' items rc change-root path vcs newline percent
+zstyle ':prompt:grml:*:items:path' pre '%F{39}'
+zstyle ':prompt:grml:*:items:percent' pre '%f%(1j.%F{blue}• .)%f'
+
 prompt off
 source $HOME/.config/zsh/prompt.zsh
 
@@ -40,6 +44,12 @@ if [[ -x $(which fzf) ]] ; then
 	fi
 fi
 
+if [[ -x $(which mcfly) ]] ; then
+	export MCFLY_FUZZY=2
+	export MCFLY_RESULTS=30
+	export MCFLY_RESULTS_SORT=LAST_RUN
+	export MCFLY_INTERFACE_VIEW="BOTTOM"
+	eval "$(mcfly init zsh)"
 fi
 
 if [[ -x $(which podman) ]]; then
@@ -91,10 +101,10 @@ alias lg='lazygit'
 if [[ $(uname) = "Darwin" ]] ; then
 	unset BROWSER
 
-	pypath="$HOME/Library/Python/3.9/bin"
-	if [[ -d "$pypath" ]] ; then
-		export PATH="$pypath:$PATH"
-	fi
+	# pypath="$HOME/Library/Python/3.9/bin"
+	# if [[ -d "$pypath" ]] ; then
+	# 	export PATH="$pypath:$PATH"
+	# fi
 
 	export HOMEBREW_NO_AUTO_UPDATE
 	export XDG_CONFIG_HOME="$HOME/.config"
