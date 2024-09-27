@@ -135,8 +135,8 @@ ctrl + alt - 7 : yabai -m window --space 7
 ctrl + alt - 8 : yabai -m window --space 8
 ctrl + alt - 9 : yabai -m window --space 9
 
-cmd - return : alacritty msg create-window || open -na alacritty
-ctrl + shift - t : alacritty msg create-window || open -na alacritty
+alt - return : alacritty msg create-window || open -na alacritty; yabai -m window --focus $(yabai -m query --windows --space | jq 'map(select(.app == "Alacritty" and .title "now@now-mac: ~"))[-1].id')
+# ctrl + shift - t : alacritty msg create-window || open -na alacritty
 
 cmd - d : skhd -k "cmd - space"
 
