@@ -68,12 +68,18 @@ exec swayidle -w \
 
 input * {
     xkb_layout "se"
+    xkb_options caps:ctrl_modifier
 }
 
 input type:touchpad {
     tap enabled
     natural_scroll enabled
     middle_emulation enabled
+}
+
+input "type:keyboard" {
+  repeat_delay 250
+  repeat_rate 40
 }
 
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -88,6 +94,8 @@ input type:touchpad {
 
     # Kill focused window
     bindsym $mod+Shift+q kill
+
+    bindsym $mod+Ctrl+q exec swaylock
 
     # Start your launcher
     bindsym $mod+d exec $menu --show drun

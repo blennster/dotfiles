@@ -9,7 +9,7 @@ case $USER in
     modules=(work "${modules[@]}" macos)
     ;;
 *)
-    modules=(home "${modules[@]}" others sway)
+    modules=(home "${modules[@]}" others)
     ;;
 esac
 
