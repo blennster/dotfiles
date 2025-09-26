@@ -8,8 +8,8 @@ option_as_alt = "OnlyLeft"
 dynamic_padding = true
 
 [font]
-normal = { family = "IosevkaTerm Nerd Font", style = "Regular" }
-size = 14
+normal = { family = "IosevkaTerm Nerd Font", style = "semibold" }
+size = 12
 
 [[hints.enabled]]
 command = "open"
