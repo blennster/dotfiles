@@ -1,7 +1,7 @@
 /* --- Global Styles --- */
 * {
-  font-family: "SF Pro Text", "Inter", "Segoe UI, NotoSans Nerd Font",
-    sans-serif;
+  font-family:
+    "SF Pro Text", "Inter", "Segoe UI, NotoSans Nerd Font", sans-serif;
   font-size: 13px;
   min-height: 0;
   padding-right: 0px;
@@ -150,7 +150,8 @@
 #backlight,
 #network,
 #custom-lock,
-#battery {
+#battery,
+#tray {
   background-color: #1a1b26;
   padding: 0.3rem 0.7rem;
   margin: 5px 0px;

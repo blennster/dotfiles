@@ -17,6 +17,7 @@
     "pulseaudio",
     "backlight",
     "battery",
+    "tray"
   ],
   "hyprland/workspaces": {
     "format": "{name}: {icon}",

@@ -15,6 +15,7 @@ return {
   automatically_reload_config = true,
   freetype_load_target = "Light",
   front_end = 'WebGpu',
+  enable_wayland = false,
   window_padding = {
     left = 10,
     right = 10,
@@ -49,7 +50,7 @@ return {
 
   -- Font settings
   font = wezterm.font("IosevkaTerm Nerd Font"),
-  font_size = 14,
+  font_size = 12,
 
   -- Option as Alt (macOS specific, assuming you need "OnlyLeft" as left ALT):
   -- keys = {
