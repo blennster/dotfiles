@@ -158,7 +158,9 @@ alt-comma = 'mode service'
 
 # Check if wezterm is open then run cli spawn, otherwise open it
 # This is due to socket connection timout being too long
-alt-enter = 'exec-and-forget (pgrep wezterm && wezterm cli spawn --new-window) || open -a wezterm'
+# alt-enter = 'exec-and-forget (pgrep wezterm && wezterm cli spawn --new-window) || open -a wezterm'
+
+alt-enter = 'exec-and-forget (alacritty msg create-window) || open -na alacritty'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes

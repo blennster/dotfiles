@@ -6,6 +6,8 @@ opacity = 1
 blur = false
 option_as_alt = "OnlyLeft"
 dynamic_padding = true
+decorations = "ButtonLess"
+padding = { x = 10, y = 10 }
 
 [font]
 normal = { family = "IosevkaTerm Nerd Font", style = "semibold" }
