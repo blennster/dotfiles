@@ -1,0 +1,14 @@
+CompileFlags:
+  Add:
+    - Wall
+  Remove:
+    - -m*
+    - -f*
+Diagnostics:
+  UnusedIncludes: Strict
+  # Suppress:
+  #   - drv_unknown_argument
+  #   - gnu-zero-variadic-macro-arguments
+  #   - gnu-statement-expression-from-macro-expansion
+  #   - gnu-auto-type
+  #   - c2x-extensions
