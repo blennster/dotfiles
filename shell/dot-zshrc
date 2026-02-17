@@ -56,6 +56,10 @@ if [[ -x $(which podman) ]]; then
 	eval $(podman completion zsh)
 fi
 
+if ! type open > /dev/null; then
+	alias open=xdg-open
+fi
+
 # History
 HISTSIZE="10000"
 SAVEHIST="10000"
@@ -92,7 +96,8 @@ if [[ -d "$GOPATH" ]] ; then
 fi
 
 export EDITOR=nvim
-export BROWSER=firefox
+export BROWSER=brave
+
 
 # Aliases
 alias lg='lazygit'
@@ -108,5 +113,10 @@ if [[ $(uname) = "Darwin" ]] ; then
 
 	export HOMEBREW_NO_AUTO_UPDATE
 	export XDG_CONFIG_HOME="$HOME/.config"
+fi
+
+
+if [[ -x $(which zoxide) ]] ; then
+	eval "$(zoxide init zsh --cmd cd)"
 fi
 
