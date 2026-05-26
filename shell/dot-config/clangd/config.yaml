@@ -1,6 +1,7 @@
 CompileFlags:
   Add:
     - Wall
+    - -ferror-limit=0
   Remove:
     - -m*
     - -f*
