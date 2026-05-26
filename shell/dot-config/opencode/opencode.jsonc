@@ -1,35 +1,33 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "lsp": true,
-  "formatter": {
-    "prettier": {
-      "command": [
-        "npx",
-        "prettier",
-        "--write",
-        "$FILE"
-      ],
-      "extensions": [
-        ".md",
-      ]
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "prompt": "{file:./system.md}",
+      "temperature": 0.2,
+      // "steps": 20
     },
+    "yolo": {
+      "mode": "primary",
+      "prompt": "{file:./system.md}",
+      "temperature": 0.6,
+      "top_p": 0.5
+    }
   },
+  "plugin": [
+    "@cortexkit/opencode-magic-context@latest"
+  ],
   "mcp": {
-    "nordicsemi": {
-      "type": "remote",
-      "enabled": true,
-      "url": "https://nordicsemi.mcp.kapa.ai"
-    },
-    "azure-devops": {
+    "serial": {
       "type": "local",
-      "enabled": false,
       "command": [
-        "npx",
-        "-y",
-        "@azure-devops/mcp",
-        "Svep",
-        "-s"
+        "/Users/now/Private/serial-mcp/serial-mcp"
       ],
-    },
+      "enabled": true
+    }
   },
+  "compaction": {
+    "auto": false,
+    "prune": false
+  }
 }

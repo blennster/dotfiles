@@ -1,4 +1,5 @@
 ---
+disable: true
 description: oneshot
 mode: primary
 permissions:

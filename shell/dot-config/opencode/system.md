@@ -96,3 +96,7 @@ EVERY subagent, under ALL circumstances. No exception. No override.
   - **Where** — affected file paths
   - **Risk** — at least 1 concrete failure mode with mitigation specific to this change; 2+ for high-blast-radius changes
   - **How** — before/after code, diff, or execution steps
+
+## BUILDING AND SUBAGENT USE
+
+- When building or running bash commands, always prefer @subtask-runner subagent.
