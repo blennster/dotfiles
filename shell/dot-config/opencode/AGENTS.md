@@ -100,3 +100,4 @@ EVERY subagent, under ALL circumstances. No exception. No override.
 ## BUILDING AND SUBAGENT USE
 
 - When building or running bash commands, always prefer @subtask-runner subagent.
+- After completing substantive work (code changes, multi-step tasks, non-trivial edits), call @turn-reviewer subagent to critique the work before presenting it. Skip for simple reads, searches, or questions with no code output.

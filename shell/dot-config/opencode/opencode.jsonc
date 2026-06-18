@@ -3,15 +3,22 @@
   "agent": {
     "build": {
       "mode": "primary",
-      "prompt": "{file:./system.md}",
       "temperature": 0.2,
       // "steps": 20
     },
     "yolo": {
       "mode": "primary",
-      "prompt": "{file:./system.md}",
       "temperature": 0.6,
       "top_p": 0.5
+    },
+    "general": {
+      "model": "opencode-go/deepseek-v4-flash"
+    },
+    "explore": {
+      "model": "opencode-go/deepseek-v4-flash"
+    },
+    "scout": {
+      "model": "opencode-go/deepseek-v4-flash"
     }
   },
   "plugin": [
@@ -24,10 +31,34 @@
         "/Users/now/Private/serial-mcp/serial-mcp"
       ],
       "enabled": true
+    },
+    "nordic-mcp": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://aidev.nordicsemi.com/mcp"
     }
   },
+  // magic context config
   "compaction": {
     "auto": false,
     "prune": false
-  }
+  },
+  "lsp": true,
+  // "ollama": {
+  //   "models": {
+  //     "gemma4:26B": {
+  //       "_launch": true,
+  //       "name": "gemma4:26B"
+  //     },
+  //     "gemma4:e4b": {
+  //       "_launch": true,
+  //       "name": "gemma4:e4b"
+  //     }
+  //   },
+  //   "name": "Ollama",
+  //   "npm": "@ai-sdk/openai-compatible",
+  //   "options": {
+  //     "baseURL": "http://127.0.0.1:11434/v1"
+  //   }
+  // }
 }
