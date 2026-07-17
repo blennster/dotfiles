@@ -45,7 +45,7 @@ description: >-
 
   </example>
 mode: subagent
-model: "opencode-go/deepseek-v4-flash"
+model: "opencode-go/mimo-v2.5"
 permission:
   bash: deny
   read: deny

@@ -3,27 +3,15 @@
   "agent": {
     "build": {
       "mode": "primary",
-      "temperature": 0.2,
-      // "steps": 20
-    },
-    "yolo": {
-      "mode": "primary",
-      "temperature": 0.6,
-      "top_p": 0.5
+      "temperature": 0.5,
     },
     "general": {
-      "model": "opencode-go/deepseek-v4-flash"
+      "model": "opencode-go/mimo-v2.5"
     },
     "explore": {
-      "model": "opencode-go/deepseek-v4-flash"
+      "model": "opencode-go/mimo-v2.5"
     },
-    "scout": {
-      "model": "opencode-go/deepseek-v4-flash"
-    }
   },
-  "plugin": [
-    "@cortexkit/opencode-magic-context@latest"
-  ],
   "mcp": {
     "serial": {
       "type": "local",
@@ -38,27 +26,24 @@
       "url": "https://aidev.nordicsemi.com/mcp"
     }
   },
-  // magic context config
-  "compaction": {
-    "auto": false,
-    "prune": false
-  },
   "lsp": true,
-  // "ollama": {
-  //   "models": {
-  //     "gemma4:26B": {
-  //       "_launch": true,
-  //       "name": "gemma4:26B"
-  //     },
-  //     "gemma4:e4b": {
-  //       "_launch": true,
-  //       "name": "gemma4:e4b"
-  //     }
-  //   },
-  //   "name": "Ollama",
-  //   "npm": "@ai-sdk/openai-compatible",
-  //   "options": {
-  //     "baseURL": "http://127.0.0.1:11434/v1"
-  //   }
-  // }
+  "provider": {
+    "ollama": {
+      "models": {
+        "gemma4:26b-mlx": {
+          "_launch": true,
+          "name": "gemma4:26b-mlx"
+        },
+        "gemma4:e4b": {
+          "_launch": true,
+          "name": "gemma4:e4b"
+        }
+      },
+      "name": "Ollama",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      }
+    }
+  },
 }
