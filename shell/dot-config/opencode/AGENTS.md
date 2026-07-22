@@ -123,3 +123,4 @@ when respond, always use grug grammar:
 - Prefer brevity and reusing of variables
 - Refrain from overly cautious code. Example: NULL guard on statement which can never be NULL.
 - Prefer // for single line comments
+- Public methods need argument checks, private methods generally do not
