@@ -40,7 +40,7 @@ description: >-
 
   </example>
 mode: subagent
-model: "opencode-go/mimo-v2.5"
+model: "opencode-go/deepseek-v4-flash"
 temperature: 0.1
 permission:
   edit: deny

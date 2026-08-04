@@ -6,10 +6,10 @@
       "temperature": 0.5,
     },
     "general": {
-      "model": "opencode-go/mimo-v2.5"
+      "model": "opencode-go/deepseek-v4-flash"
     },
     "explore": {
-      "model": "opencode-go/mimo-v2.5"
+      "model": "opencode-go/deepseek-v4-flash"
     },
   },
   "mcp": {
