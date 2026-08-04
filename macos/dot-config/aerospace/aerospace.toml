@@ -47,6 +47,8 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 on-focus-changed = ['move-mouse window-lazy-center']
 
+# focus-follows-mouse.enabled = true
+
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
 # - Constant:     gaps.outer.top = 8
@@ -57,10 +59,14 @@ on-focus-changed = ['move-mouse window-lazy-center']
 [gaps]
 inner.horizontal = 10
 inner.vertical = 10
-outer.left = 5
 outer.bottom = 5
 outer.top = 5
+outer.left = 5
 outer.right = 5
+
+[workspace-to-monitor-force-assignment]
+0 = '^built-in retina display$' # Case insensitive regex match
+
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
