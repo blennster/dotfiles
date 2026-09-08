@@ -5,7 +5,7 @@ local mainMod = "SUPER"
 
 hl.monitor({
   output = "desc:Dell Inc. DELL S3425DW 8N1TR44",
-  mode = "3440x1440@99.98Hz",
+  mode = "3440x1440@120.00Hz",
   position = "0x0",
   scale = "auto",
   bitdepth = 10
